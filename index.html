@@ -5,13 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tétrico Romance | Official</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Iconos vectoriales para el menú flotante -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Syncopate:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Menú Flotante de Redes Sociales -->
+    <div id="intro-screen">
+        <img src="assets/emblema.jpg" class="intro-emblem" alt="Emblema Tétrico Romance">
+        <button id="enter-btn" class="btn-primary">INICIAR RITUAL</button>
+    </div>
+
+    <div class="fixed-background">
+        <div id="youtube-container" class="video-bg"></div>
+        <div class="slideshow-bg"></div>
+        <div class="overlay-dark"></div>
+    </div>
+
     <div class="floating-socials">
         <a href="#" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
         <a href="https://www.youtube.com/@tu_canal" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
@@ -19,38 +28,24 @@
         <a href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     </div>
 
-    <!-- Encabezado Principal -->
     <header>
-        <div class="logo">TÉTRICO ROMANCE</div>
+        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo">
         <nav>
             <ul>
-                <li><a href="#video">Último Video</a></li>
                 <li><a href="#musica">Lanzamientos</a></li>
                 <li><a href="#shows">Próximos Shows</a></li>
-                <li><a href="#galeria">Galería en Vivo</a></li>
+                <li><a href="#galeria">Galería</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Sección Hero con foto en vivo de fondo -->
     <section class="hero">
-        <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="vanguard-title">El Velo Se Abre</h1>
             <p>Gothic Rock | Nuevo sencillo disponible</p>
-            <a href="#musica" class="btn-primary">Escuchar "En Mis Heridas"</a>
         </div>
     </section>
 
-    <!-- Sección del Video Incrustado -->
-    <section id="video" class="section-dark">
-        <h2 class="section-title">Visuales</h2>
-        <div class="video-container">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ru5kK9lHAvo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-    </section>
-
-    <!-- Sección de Música (Single) -->
     <section id="musica" class="section-accent">
         <div class="content-split">
             <div class="text-side">
@@ -67,8 +62,7 @@
         </div>
     </section>
 
-    <!-- Sección de Próximo Show -->
-    <section id="shows" class="section-dark">
+    <section id="shows" class="section-dark transparent-bg">
         <h2 class="section-title">Próximo Ritual</h2>
         <div class="show-container">
             <img src="assets/cartel-mayo.jpg" alt="Cartel Sábado 09 de Mayo" class="poster-img">
@@ -82,20 +76,22 @@
         </div>
     </section>
 
-    <!-- Galería en Vivo -->
-    <section id="galeria" class="section-dark">
-        <h2 class="section-title">Galería</h2>
-        <div class="grid-gallery">
-            <img src="assets/live-1.jpg" alt="Tétrico Romance en vivo">
-            <img src="assets/live-2.jpg" alt="Vocalista Tétrico Romance">
-            <img src="assets/live-3.jpg" alt="Guitarrista en vivo">
-            <img src="assets/live-4.jpg" alt="Tecladista en vivo">
-        </div>
-    </section>
-
     <footer>
         <p>&copy; 2026 Tétrico Romance. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        document.getElementById('enter-btn').addEventListener('click', function() {
+            // Desvanecer la pantalla de inicio
+            const intro = document.getElementById('intro-screen');
+            intro.style.opacity = '0';
+            setTimeout(() => { intro.style.display = 'none'; }, 1000);
+
+            // Inyectar el video de YouTube con Autoplay encendido
+            const videoContainer = document.getElementById('youtube-container');
+            videoContainer.innerHTML = '<iframe src="https://www.youtube.com/embed/ru5kK9lHAvo?autoplay=1&loop=1&playlist=ru5kK9lHAvo&controls=0&showinfo=0&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+        });
+    </script>
 
 </body>
 </html>
