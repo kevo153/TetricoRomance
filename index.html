@@ -3,81 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tétrico Romance | Official</title>
+    <title>Tétrico Romance | En Mis Heridas Broadcast</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Syncopate:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="tv-static-bg">
+
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
 
     <div id="intro-screen">
-        <img src="assets/emblema.jpg" class="intro-emblem glitch-img" alt="Emblema Tétrico Romance">
-        <button id="enter-btn" class="btn-primary">INICIAR RITUAL</button>
+        <div class="intro-content">
+            <img src="assets/emblema.jpg" class="intro-emblem glitch-img-constant" alt="Emblema Tétrico Romance">
+            <h2 class="transmitting-text">TRANSMITIENDO...</h2>
+            <button id="enter-btn" class="btn-primary btn-glitch">ACEPTAR FRECUENCIA</button>
+        </div>
     </div>
 
     <div class="fixed-background">
         <div id="youtube-container" class="video-bg"></div>
-        <div class="slideshow-bg"></div>
         <div class="overlay-dark"></div>
     </div>
 
     <div class="floating-socials reveal-fade">
         <a href="#" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
-        <a href="https://www.youtube.com/@tu_canal" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.youtube.com/@TetricoRomance" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
         <a href="#" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
         <a href="#" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     </div>
 
     <header>
-        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo glitch-img">
+        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo">
         <nav>
             <ul>
-                <li><a href="#musica">Lanzamientos</a></li>
-                <li><a href="#shows">Próximos Shows</a></li>
-                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#proximo">Próximo Sencillo</a></li>
+                <li><a href="#shows">Rituales</a></li>
+                <li><a href="#galeria">Evidencia</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero reveal">
         <div class="hero-content">
-            <h1 class="vanguard-title glitch-text" data-text="El Velo Se Abre">El Velo Se Abre</h1>
-            <p>Gothic Rock | Nuevo sencillo disponible</p>
+            <h1 class="vanguard-title glitch-text" data-text="EN MIS HERIDAS">EN MIS HERIDAS</h1>
+            <p class="subtitle text-bleed">SIGNAL LOSS DETECTED // PRE-SAVE PRÓXIMAMENTE</p>
         </div>
     </section>
 
-    <section id="musica" class="section-accent reveal">
-        <div class="content-split">
-            <div class="text-side">
-                <h2 class="section-title">En Mis Heridas</h2>
-                <p>Nuestro más reciente lanzamiento. Una inmersión sonora en la oscuridad y la melancolía.</p>
-                <div class="listen-links">
-                    <a href="#" class="btn-outline"><i class="fa-brands fa-spotify"></i> Spotify</a>
-                    <a href="#" class="btn-outline"><i class="fa-brands fa-apple"></i> Apple Music</a>
-                </div>
+    <section id="proximo" class="section-single-launch reveal">
+        <div class="content-split launch-container">
+            <div class="image-side art-container">
+                <img src="assets/cover-en-mis-heridas.jpg" alt="Portada En Mis Heridas Cassette" class="cover-art art-glitch">
+                <div class="art-shadow"></div>
             </div>
-            <div class="image-side">
-                <img src="assets/cover-en-mis-heridas.jpg" alt="Portada En Mis Heridas" class="cover-art glitch-hover">
+            <div class="text-side launch-details">
+                <h2 class="section-title text-bleed">Frecuencia Agonizante</h2>
+                <p>Una inmersión sonora en la oscuridad, la melancolía y la carne expuesta. "En Mis Heridas" es el nuevo pulso de Tétrico Romance.</p>
+                <div class="status-box">
+                    <span class="status-dot blinking"></span>
+                    <span class="status-text">ESTADO: TRANSMISIÓN INMINENTE</span>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="shows" class="section-dark transparent-bg reveal">
         <h2 class="section-title">Próximo Ritual</h2>
-        <div class="show-container">
+        <div class="show-container crt-box">
             <img src="assets/cartel-mayo.jpg" alt="Cartel Sábado 09 de Mayo" class="poster-img glitch-hover">
             <div class="show-info">
-                <h3>Sábado 09 de Mayo - 9:00 PM</h3>
+                <h3>Sábado 09 de Mayo // 9:00 PM</h3>
                 <p><strong>La Cueva de la Patrona</strong></p>
-                <p>Av. 10 de Mayo 514, Centro, Mérida, Yuc.</p>
-                <p class="price">Acceso: $50 Pesos</p>
+                <p>Mérida, Yucatán.</p>
                 <p class="bands">Junto a The Plastic Pumpkins y Viceroy Eyes</p>
+                <a href="#" class="btn-outline btn-tiny">INFO BOLETOS</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="section-accent reveal">
+        <h2 class="section-title text-bleed">Evidencia En Vivo</h2>
+        <div class="grid-gallery">
+            <div class="gallery-item reveal-item">
+                <img src="assets/live-1.jpg" alt="Tétrico Romance Show 1" class="gallery-img">
+            </div>
+            <div class="gallery-item reveal-item">
+                <img src="assets/live-2.jpg" alt="Tétrico Romance Show 2" class="gallery-img">
+            </div>
+            <div class="gallery-item reveal-item">
+                <img src="assets/live-3.jpg" alt="Tétrico Romance Show 3" class="gallery-img">
+            </div>
+            <div class="gallery-item reveal-item">
+                <img src="assets/live-4.jpg" alt="Tétrico Romance Show 4" class="gallery-img">
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 Tétrico Romance. Todos los derechos reservados.</p>
+        <p class="text-muted">TÉTRICO ROMANCE BCAST // 2026 // END OF TRANSMISSION</p>
     </footer>
 
     <script>
@@ -88,27 +112,27 @@
             setTimeout(() => { intro.style.display = 'none'; }, 1000);
 
             const videoContainer = document.getElementById('youtube-container');
+            // Usamos el video de YouTube como teaser
             videoContainer.innerHTML = '<iframe src="https://www.youtube.com/embed/ru5kK9lHAvo?autoplay=1&loop=1&playlist=ru5kK9lHAvo&controls=0&showinfo=0&rel=0&modestbranding=1&mute=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
         });
 
-        // 2. Intersection Observer para Aparición Suave (Scroll Reveal Moderno)
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
+        // 2. Scroll Reveal Moderno
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
+                    // Si es una galería, revelar ítems secuencialmente
+                    if(entry.target.classList.contains('grid-gallery')){
+                        entry.target.querySelectorAll('.reveal-item').forEach((item, index) => {
+                            setTimeout(() => item.classList.add('active'), index * 150);
+                        });
+                    }
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal').forEach((section) => {
-            observer.observe(section);
-        });
+        document.querySelectorAll('.reveal, .grid-gallery').forEach((el) => observer.observe(el));
     </script>
 
 </body>
