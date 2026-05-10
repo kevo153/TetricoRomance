@@ -10,11 +10,14 @@
 </head>
 <body class="tv-static-bg">
 
+    <audio id="bg-audio" src="assets/nuevo_single.mp3" loop preload="auto"></audio>
+
+    <div class="fixed-background"></div>
+
     <div class="petals-container" id="petals"></div>
 
     <div class="crt-overlay"></div>
     <div class="scanlines"></div>
-    <div class="neon-flash-overlay"></div>
 
     <header class="floating-header">
         <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo glitch-img">
@@ -36,10 +39,6 @@
     </div>
 
     <section class="hero-cinematic">
-        <div class="giant-numbers-container">
-            <div class="giant-number">26</div>
-            <div class="giant-number">05</div>
-        </div>
         
         <div class="hero-info" id="historia">
             <h1 class="vanguard-title glitch-text" data-text="EN MIS HERIDAS">EN MIS HERIDAS</h1>
@@ -49,6 +48,12 @@
             </div>
             <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" class="btn-primary neon-btn">ESCUCHAR / PRE-SAVE</a>
         </div>
+
+        <div class="giant-numbers-container">
+            <div class="giant-number">26</div>
+            <div class="giant-number">05</div>
+        </div>
+
     </section>
 
     <section id="shows" class="section-dark reveal">
@@ -84,6 +89,13 @@
     </footer>
 
     <script>
+        // Lógica de Audio BGM con volumen bajo (Inicia al primer clic en la página)
+        const bgAudio = document.getElementById('bg-audio');
+        bgAudio.volume = 0.2; // Volumen al 20%
+        document.body.addEventListener('click', function() {
+            if (bgAudio.paused) { bgAudio.play(); }
+        }, { once: true });
+
         // Crear pétalos/cenizas dinámicas
         const petalsContainer = document.getElementById('petals');
         for (let i = 0; i < 25; i++) {
@@ -92,7 +104,6 @@
             petal.style.left = Math.random() * 100 + 'vw';
             petal.style.animationDelay = Math.random() * 8 + 's';
             petal.style.opacity = Math.random() * 0.7 + 0.3;
-            // Aleatorizar tamaño para dar profundidad
             const size = Math.random() * 10 + 5; 
             petal.style.width = size + 'px';
             petal.style.height = size + 'px';
