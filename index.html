@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tétrico Romance | En Mis Heridas Broadcast</title>
+    <title>Tétrico Romance | En Mis Heridas</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Syncopate:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Syncopate:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="tv-static-bg">
 
@@ -14,67 +14,44 @@
 
     <div class="crt-overlay"></div>
     <div class="scanlines"></div>
+    <div class="neon-flash-overlay"></div>
 
-    <div id="intro-screen">
-        <div class="intro-content">
-            <img src="assets/emblema.jpg" class="intro-emblem glitch-img-constant" alt="Emblema Tétrico Romance">
-            <h2 class="transmitting-text">TRANSMITIENDO...</h2>
-            <button id="enter-btn" class="btn-primary btn-glitch">INICIAR RITUAL</button>
-        </div>
-    </div>
-
-    <div class="fixed-background">
-        <div class="slideshow-bg"></div>
-        <div class="overlay-dark"></div>
-    </div>
-
-    <div class="floating-socials">
-        <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
-        <a href="https://www.youtube.com/user/TrOficial1" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://www.instagram.com/tetricoromance/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.facebook.com/TRPaginaOficial/" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-    </div>
-
-    <header>
-        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo">
-        <nav>
+    <header class="floating-header">
+        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo glitch-img">
+        <nav class="sleek-nav">
             <ul>
-                <li><a href="#proximo">Próximo Sencillo</a></li>
+                <li><a href="#historia">El Single</a></li>
                 <li><a href="#shows">Rituales</a></li>
                 <li><a href="#galeria">Evidencia</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero reveal">
-        <div class="hero-content">
+    <div class="floating-socials">
+        <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+        <a href="https://music.apple.com/mx/artist/t%C3%A9trico-romance/1263451481" target="_blank" title="Apple Music"><i class="fa-brands fa-apple"></i></a>
+        <a href="https://www.youtube.com/user/TrOficial1" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.instagram.com/tetricoromance/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/TRPaginaOficial/" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    </div>
+
+    <section class="hero-cinematic">
+        <div class="giant-numbers-container">
+            <div class="giant-number">26</div>
+            <div class="giant-number">05</div>
+        </div>
+        
+        <div class="hero-info" id="historia">
             <h1 class="vanguard-title glitch-text" data-text="EN MIS HERIDAS">EN MIS HERIDAS</h1>
-            <p class="subtitle text-bleed">SIGNAL LOSS DETECTED // PRE-SAVE PRÓXIMAMENTE</p>
+            <div class="story-box">
+                <p>Nuevo single que fue concebido en las primeras etapas de <em>Pasión, Amor y Muerte</em> (álbum anterior), pero que no ve la luz hasta ahora como parte de nuestro nuevo álbum.</p>
+                <p>Canciones de alta magia. Este y otros temas más estarán disponibles próximamente de manera inédita aquí.</p>
+            </div>
+            <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" class="btn-primary neon-btn">ESCUCHAR / PRE-SAVE</a>
         </div>
     </section>
 
-    <section id="proximo" class="section-single-launch reveal">
-        <div class="content-split launch-container">
-            <div class="image-side art-container">
-                <img src="assets/cover-en-mis-heridas.jpg" alt="Portada En Mis Heridas" class="cover-art art-glitch">
-                <div class="art-shadow"></div>
-            </div>
-            <div class="text-side launch-details">
-                <h2 class="section-title text-bleed">Frecuencia Agonizante</h2>
-                <p>Una inmersión sonora en la oscuridad y la carne expuesta. "En Mis Heridas" es el nuevo pulso de Tétrico Romance.</p>
-                <div class="listen-links">
-                    <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" target="_blank" class="btn-outline"><i class="fa-brands fa-spotify"></i> Spotify</a>
-                    <a href="https://music.apple.com/mx/artist/t%C3%A9trico-romance/1263451481" target="_blank" class="btn-outline"><i class="fa-brands fa-apple"></i> Apple Music</a>
-                </div>
-                <div class="status-box" style="margin-top: 20px;">
-                    <span class="status-dot blinking"></span>
-                    <span class="status-text">ESTADO: TRANSMISIÓN INMINENTE</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="shows" class="section-dark transparent-bg reveal">
+    <section id="shows" class="section-dark reveal">
         <h2 class="section-title">Próximo Ritual</h2>
         <div class="show-container crt-box">
             <img src="assets/cartel-mayo.jpg" alt="Cartel Sábado 09 de Mayo" class="poster-img glitch-hover">
@@ -82,6 +59,7 @@
                 <h3>Sábado 09 de Mayo // 9:00 PM</h3>
                 <p><strong>La Cueva de la Patrona</strong> // Mérida, Yucatán.</p>
                 <p class="bands">Junto a The Plastic Pumpkins y Viceroy Eyes</p>
+                <p class="price" style="margin-top: 10px; color: #a855f7;">Acceso: $50 Pesos</p>
             </div>
         </div>
     </section>
@@ -106,25 +84,22 @@
     </footer>
 
     <script>
-        // Iniciar Ritual
-        document.getElementById('enter-btn').addEventListener('click', function() {
-            const intro = document.getElementById('intro-screen');
-            intro.style.opacity = '0';
-            setTimeout(() => { intro.style.display = 'none'; }, 1000);
-        });
-
-        // Crear pétalos dinámicos
+        // Crear pétalos/cenizas dinámicas
         const petalsContainer = document.getElementById('petals');
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 25; i++) {
             const petal = document.createElement('div');
             petal.className = 'petal';
             petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDelay = Math.random() * 5 + 's';
-            petal.style.opacity = Math.random();
+            petal.style.animationDelay = Math.random() * 8 + 's';
+            petal.style.opacity = Math.random() * 0.7 + 0.3;
+            // Aleatorizar tamaño para dar profundidad
+            const size = Math.random() * 10 + 5; 
+            petal.style.width = size + 'px';
+            petal.style.height = size + 'px';
             petalsContainer.appendChild(petal);
         }
 
-        // Scroll Reveal
+        // Scroll Reveal Moderno
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');

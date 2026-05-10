@@ -1,11 +1,10 @@
 :root {
-    --bg-base: #0a0a0c; /* Negro carbón estático */
-    --bg-lighter: #141417;
-    --accent-bruise: #2d1b4a; /* Púrpura profundo del cassette */
-    --accent-static: #4a6fa5; /* Azul eléctrico deslavado del cassette */
-    --accent-glow: #6c4b9e;
-    --text-main: #d1d1d1; /* Gris deslavado */
-    --text-muted: #666;
+    --bg-base: #07030a; /* Negro muy profundo, casi morado */
+    --bg-lighter: #110817;
+    --accent-bruise: #41166c; /* Púrpura de la portada */
+    --accent-neon: #a855f7; /* Violeta neón brillante */
+    --text-main: #e2d5f8; /* Blanco purpúreo */
+    --text-muted: #8b75a5;
     --font-vanguard: 'Syncopate', sans-serif;
     --font-gothic: 'Cinzel', serif;
 }
@@ -18,398 +17,256 @@ body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    position: relative;
+    /* Fondo estático sutil detrás de todo */
+    background-image: radial-gradient(circle at center, var(--bg-lighter) 0%, var(--bg-base) 100%);
 }
 
 /* =========================================
-   EFECTOS TV VIEJA (CRT, NOISE, SCANLINES)
+   EFECTOS: RUIDO, SCANLINES Y NEÓN
    ========================================= */
-
-/* 1. Ruido de TV (Static) superpuesto a TODO */
 .crt-overlay::before {
-    content: "";
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: 
-        radial-gradient(#fff 10%, transparent 15%),
-        radial-gradient(#fff 10%, transparent 15%);
-    background-size: 3px 3px;
-    background-position: 0 0, 1.5px 1.5px;
-    opacity: 0.03; 
-    z-index: 100; 
-    pointer-events: none;
+    content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(#fff 10%, transparent 15%), radial-gradient(#fff 10%, transparent 15%);
+    background-size: 3px 3px; background-position: 0 0, 1.5px 1.5px;
+    opacity: 0.04; z-index: 100; pointer-events: none;
     animation: staticNoise 0.2s infinite;
 }
 
 @keyframes staticNoise {
     0% { transform: translate(0, 0); }
-    10% { transform: translate(-1px, -1px); }
-    30% { transform: translate(1px, -1px); }
-    50% { transform: translate(-1px, 1px); }
-    70% { transform: translate(1px, 1px); }
-    90% { transform: translate(-1px, -1px); }
-    100% { transform: translate(0, 0); }
+    50% { transform: translate(1px, 1px); }
+    100% { transform: translate(-1px, -1px); }
 }
 
-/* 2. Líneas de Escaneo CRT */
 .scanlines {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0) 50%,
-        rgba(0, 0, 0, 0.1) 50%
-    );
-    background-size: 100% 4px; 
-    z-index: 99;
-    pointer-events: none;
-    opacity: 0.3;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%);
+    background-size: 100% 4px; z-index: 99; pointer-events: none;
 }
 
-/* 3. Liguera curvatura de pantalla CRT en bordes */
-body::after {
-    content: "";
+/* Flashes eléctricos de Neón (Relámpagos púrpuras aleatorios) */
+.neon-flash-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.4) 100%);
-    z-index: 101;
-    pointer-events: none;
+    background: var(--accent-neon);
+    opacity: 0; z-index: 98; pointer-events: none;
+    animation: neonFlash 7s infinite;
+    mix-blend-mode: overlay;
+}
+
+@keyframes neonFlash {
+    0%, 95%, 98%, 100% { opacity: 0; }
+    96% { opacity: 0.1; }
+    97% { opacity: 0.3; }
+    99% { opacity: 0.15; }
 }
 
 /* =========================================
-   PÉTALOS PÚRPURA (EFECTO MELANCÓLICO)
+   PÉTALOS / CENIZAS PÚRPURAS
    ========================================= */
 .petals-container {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 5; /* Por detrás del texto frontal, delante del fondo */
-    overflow: hidden;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 5; overflow: hidden;
 }
 
 .petal {
     position: absolute;
-    width: 14px; height: 14px;
     background: var(--accent-bruise);
-    border-radius: 150% 0 150% 0; /* Forma orgánica de hoja/pétalo */
-    opacity: 0.7;
-    filter: blur(1.5px);
-    animation: fall 12s linear infinite;
+    border-radius: 150% 0 150% 0; /* Forma de pétalo marchito */
+    box-shadow: 0 0 10px var(--accent-neon);
+    animation: fall linear infinite;
 }
 
 @keyframes fall {
-    0% { transform: translateY(-10vh) rotate(0deg) translateX(0); }
-    100% { transform: translateY(110vh) rotate(360deg) translateX(80px); }
+    0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; }
 }
 
 /* =========================================
-   PANTALLA DE INICIO (RITUAL)
+   MENÚ Y REDES (ESTILO FLOTANTE)
    ========================================= */
-#intro-screen {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(var(--accent-bruise), rgba(0,0,0,0.95)), url('assets/hero-bg.jpg') center/cover no-repeat;
-    z-index: 10000; display: flex; align-items: center; justify-content: center;
-    transition: opacity 1s ease, filter 0.5s ease;
+.floating-header {
+    position: fixed; width: 100%; top: 0; left: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 40px; z-index: 1000;
+    background: linear-gradient(to bottom, rgba(7, 3, 10, 0.9), transparent);
 }
 
-.intro-content { text-align: center; }
+.nav-logo { height: 45px; object-fit: contain; filter: drop-shadow(0 0 5px var(--accent-neon)); }
 
-.intro-emblem { 
-    width: 200px; height: auto; margin-bottom: 20px; 
-    filter: drop-shadow(0 0 15px var(--accent-static));
+.sleek-nav ul { display: flex; list-style: none; gap: 30px; }
+.sleek-nav a { 
+    color: var(--text-main); text-decoration: none; font-size: 0.75rem; 
+    text-transform: uppercase; letter-spacing: 3px; font-weight: 600; transition: 0.3s;
+}
+.sleek-nav a:hover { color: var(--accent-neon); text-shadow: 0 0 10px var(--accent-neon); }
+
+.floating-socials {
+    position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 20px; z-index: 999;
 }
 
-.transmitting-text {
-    font-family: var(--font-vanguard); color: var(--accent-static);
-    font-size: 1rem; letter-spacing: 4px; margin-bottom: 30px;
-    animation: blinkText 1.5s infinite;
+.floating-socials a { 
+    color: var(--text-muted); font-size: 1.3rem; transition: 0.3s; 
+    display: flex; justify-content: center; align-items: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);
 }
-
-@keyframes blinkText { 50% { opacity: 0.2; } }
+.floating-socials a:hover { 
+    color: #fff; background: var(--accent-bruise);
+    border-color: var(--accent-neon); box-shadow: 0 0 15px var(--accent-neon);
+    transform: scale(1.1);
+}
 
 /* =========================================
-   ENCABEZADO Y LOGO
+   SECCIÓN HERO: ESTILO "1917" (NÚMEROS GIGANTES)
    ========================================= */
-header {
-    position: fixed; width: 100%; top: 0; display: flex;
-    justify-content: space-between; align-items: center; padding: 15px 5%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent); z-index: 1000;
-    backdrop-filter: blur(3px);
-}
-
-.nav-logo { height: 40px; width: auto; object-fit: contain; filter: brightness(0.9); transition: filter 0.3s ease; }
-.nav-logo:hover { filter: brightness(1.2) drop-shadow(0 0 5px var(--accent-static)); }
-
-nav ul { display: flex; list-style: none; gap: 25px; }
-nav a { 
-    color: var(--text-main); text-decoration: none; font-size: 0.8rem; 
-    text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
-    font-weight: 600;
-}
-nav a:hover { color: var(--accent-static); text-shadow: 0 0 8px var(--accent-glow); }
-
-/* =========================================
-   SECCIONES GENERALES Y BOTONES
-   ========================================= */
-.hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 5%; position: relative; z-index: 10; }
-
-.vanguard-title { 
-    font-family: var(--font-vanguard); font-size: 4.5rem; text-transform: uppercase; 
-    letter-spacing: 10px; margin-bottom: 15px;
-    color: var(--text-main);
-}
-
-.subtitle { font-size: 0.9rem; letter-spacing: 3px; color: var(--text-muted); text-transform: uppercase; }
-
-/* Efecto de sangrado de color (Bruise effect) en texto */
-.text-bleed {
-    color: var(--text-main);
-    text-shadow: 
-        2px 0 var(--accent-bruise),
-        -2px 0 var(--accent-static);
-}
-
-.btn-primary, .btn-outline {
-    display: inline-block; padding: 12px 35px; background: transparent; 
-    color: var(--text-main); border: 1px solid rgba(255,255,255,0.2); 
-    font-weight: 600; letter-spacing: 2px; text-transform: uppercase; 
-    cursor: pointer; transition: all 0.3s ease; font-size: 0.8rem;
-    position: relative; overflow: hidden;
-}
-
-.btn-primary { background-color: rgba(45, 27, 74, 0.4); border-color: var(--accent-bruise); }
-.btn-primary:hover { 
-    background-color: var(--accent-bruise); 
-    box-shadow: 0 0 20px var(--accent-glow);
-    border-color: var(--accent-glow);
-    color: #fff;
-}
-
-.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--text-main); color: #fff; }
-.btn-tiny { padding: 8px 20px; font-size: 0.7rem; margin-top: 15px; }
-
-/* =========================================
-   LANZAMIENTO: EN MIS HERIDAS
-   ========================================= */
-.section-single-launch {
-    padding: 100px 10%;
-    background: radial-gradient(circle at center, var(--bg-lighter) 0%, var(--bg-base) 100%);
-    border-top: 1px solid rgba(255,255,255,0.03);
-    border-bottom: 1px solid rgba(255,255,255,0.03);
+.hero-cinematic {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Separa los números del texto */
+    padding: 0 10% 0 5%;
     position: relative;
     z-index: 10;
 }
 
-.launch-container { align-items: center; gap: 60px; }
-
-.art-container { position: relative; display: flex; justify-content: center; }
-.cover-art { 
-    width: 100%; max-width: 380px; height: auto; 
-    border-radius: 4px; position: relative; z-index: 2;
-    filter: contrast(1.1) brightness(1.1);
+/* Contenedor de la fecha gigante */
+.giant-numbers-container {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.75;
+    user-select: none;
 }
 
-.art-shadow {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 120%; height: 120%;
-    background: radial-gradient(circle, rgba(108, 75, 158, 0.25) 0%, transparent 70%);
-    z-index: 1; pointer-events: none;
+.giant-number {
+    font-family: var(--font-vanguard);
+    font-size: 28vw; /* Se ajusta al tamaño de la pantalla */
+    font-weight: 900;
+    margin: 0; padding: 0;
+    /* La magia: Imagen dentro del texto */
+    background: url('assets/cover-en-mis-heridas.jpg') center/cover no-repeat;
+    background-attachment: fixed; /* Efecto parallax dentro del texto */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent; /* Fallback */
+    /* Ligero borde neón para que resalte en el fondo negro */
+    filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.15));
 }
 
-.launch-details { position: relative; }
-.launch-details p { margin-bottom: 25px; color: var(--text-muted); font-size: 1rem; }
-.listen-links { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
-
-.status-box {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(0,0,0,0.6); padding: 10px 20px;
-    border: 1px solid var(--accent-static); border-radius: 2px;
-    font-family: monospace; font-size: 0.8rem; color: var(--accent-static);
+/* Contenedor de la Historia */
+.hero-info {
+    max-width: 450px;
+    text-align: right;
+    margin-right: 5%;
 }
 
-.status-dot { width: 8px; height: 8px; background-color: var(--accent-static); border-radius: 50%; box-shadow: 0 0 10px var(--accent-static); }
-.blinking { animation: statusBlink 1s infinite; }
-@keyframes statusBlink { 50% { opacity: 0; } }
+.vanguard-title { 
+    font-family: var(--font-vanguard); font-size: 2.5rem; text-transform: uppercase; 
+    letter-spacing: 5px; margin-bottom: 20px; color: #fff;
+    text-shadow: 0 0 15px var(--accent-neon);
+}
+
+.story-box {
+    background: rgba(65, 22, 108, 0.1);
+    border-right: 3px solid var(--accent-neon);
+    padding: 20px; margin-bottom: 30px;
+    backdrop-filter: blur(4px);
+}
+
+.story-box p {
+    font-size: 0.95rem; color: var(--text-main); margin-bottom: 15px;
+    text-align: justify; text-align-last: right;
+}
+
+.story-box p:last-child { margin-bottom: 0; }
+
+.neon-btn {
+    display: inline-block; padding: 15px 40px; 
+    background: transparent; color: #fff; 
+    border: 1px solid var(--accent-neon); 
+    font-weight: 700; letter-spacing: 3px; font-size: 0.8rem;
+    cursor: pointer; transition: 0.3s;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.3), inset 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+.neon-btn:hover { 
+    background: var(--accent-neon); color: #fff;
+    box-shadow: 0 0 30px var(--accent-neon), inset 0 0 20px #fff;
+    text-shadow: 0 0 5px #fff;
+}
 
 /* =========================================
-   RITUALES (SHOWS) Y EVIDENCIA (GALERÍA)
+   SECCIONES SECUNDARIAS
    ========================================= */
-.section-dark { padding: 90px 10%; position: relative; z-index: 10; }
-.transparent-bg { background: transparent; }
+.section-dark { padding: 100px 10%; position: relative; z-index: 10; }
+.section-accent { padding: 100px 10%; background: var(--bg-lighter); position: relative; z-index: 10; border-top: 1px solid rgba(168, 85, 247, 0.1); }
 
 .section-title { 
-    font-family: var(--font-gothic); font-size: 2.8rem; margin-bottom: 50px; 
-    text-align: center; letter-spacing: 3px; font-weight: 400;
+    font-family: var(--font-gothic); font-size: 2.5rem; margin-bottom: 50px; 
+    text-align: center; letter-spacing: 3px;
+    color: var(--text-main); text-shadow: 0 0 10px var(--accent-bruise);
 }
 
+/* Shows */
 .crt-box {
-    background: var(--bg-lighter); padding: 40px;
-    border: 1px solid rgba(255,255,255,0.05);
-    border-left: 3px solid var(--accent-static);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-    position: relative;
+    background: rgba(0,0,0,0.6); padding: 40px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-left: 4px solid var(--accent-neon);
+    display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto;
 }
+.poster-img { max-width: 250px; filter: grayscale(50%) sepia(20%) hue-rotate(240deg) contrast(1.2); transition: 0.4s; border: 1px solid var(--accent-bruise); }
+.poster-img:hover { filter: grayscale(0%) contrast(1.1); box-shadow: 0 0 20px var(--accent-bruise); }
+.show-info h3 { font-family: var(--font-gothic); font-size: 1.8rem; color: #fff; margin-bottom: 10px; }
+.show-info p { color: var(--text-main); font-size: 1rem; margin-bottom: 8px; }
+.show-info .bands { font-style: italic; color: var(--accent-neon); margin-top: 15px; }
 
-.show-container { display: flex; gap: 40px; max-width: 900px; margin: 0 auto; align-items: center; }
-.poster-img { max-width: 250px; filter: grayscale(80%) contrast(1.2); transition: 0.3s; }
-.poster-img:hover { filter: grayscale(0%) contrast(1.1); }
+/* Galería */
+.grid-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+.gallery-item { height: 250px; overflow: hidden; position: relative; border: 1px solid rgba(168, 85, 247, 0.2); background: #000; }
+.gallery-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.3) brightness(0.6); transition: 0.5s; }
+.gallery-item:hover .gallery-img { filter: grayscale(0%) contrast(1.1) brightness(1); transform: scale(1.05); }
+.gallery-item:hover { border-color: var(--accent-neon); box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); z-index: 10; }
 
-.show-info h3 { font-size: 1.6rem; color: var(--text-main); margin-bottom: 10px; font-family: var(--font-gothic); }
-.show-info p { color: var(--text-muted); margin-bottom: 8px; font-size: 0.9rem; }
-.show-info strong { color: var(--text-main); }
-.show-info .bands { font-style: italic; margin-top: 15px; color: var(--accent-static); }
-
-/* Galería Grid Moderna */
-.section-accent { padding: 90px 10%; background: var(--bg-lighter); position: relative; z-index: 10; }
-
-.grid-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-}
-
-.gallery-item {
-    position: relative; overflow: hidden; height: 250px;
-    border: 1px solid rgba(255,255,255,0.03);
-    transition: transform 0.3s ease;
-    background: #000;
-}
-
-.gallery-img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(100%) contrast(1.3) brightness(0.6);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.gallery-item:hover { transform: translateY(-5px) scale(1.02); z-index: 10; border-color: rgba(255,255,255,0.15); box-shadow: 0 10px 20px rgba(0,0,0,0.8); }
-.gallery-item:hover .gallery-img { filter: grayscale(0%) contrast(1.1) brightness(1); }
+footer { text-align: center; padding: 40px; background: #000; border-top: 1px solid rgba(168, 85, 247, 0.2); font-size: 0.7rem; letter-spacing: 3px; position: relative; z-index: 10; }
 
 /* =========================================
-   REDES Y FONDO FIJO
-   ========================================= */
-.floating-socials {
-    position: fixed; right: 25px; top: 50%; transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 18px; z-index: 999;
-    background: rgba(10, 10, 12, 0.7); backdrop-filter: blur(10px);
-    padding: 20px 12px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05);
-}
-
-.floating-socials a { color: var(--text-muted); font-size: 1.2rem; text-align: center; transition: 0.3s; }
-.floating-socials a:hover { color: var(--accent-static); transform: scale(1.2); text-shadow: 0 0 15px var(--accent-glow); }
-
-.fixed-background { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; overflow: hidden; }
-
-.slideshow-bg {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    /* Fondo actualizado sin video, usando imagen oscurecida */
-    background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('assets/hero-bg.jpg') center/cover no-repeat;
-}
-
-footer { position: relative; z-index: 10; text-align: center; padding: 40px; background: #050505; border-top: 1px solid rgba(255,255,255,0.03); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
-
-/* =========================================
-   GLITCH EFFECTS (MEJORADOS Y APLICADOS)
+   GLITCH Y ANIMACIONES
    ======================================== */
+.glitch-text { position: relative; }
+.glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; }
+.glitch-text::before { left: 2px; text-shadow: -2px 0 var(--accent-neon); clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 3s infinite linear alternate-reverse; }
+.glitch-text::after { left: -2px; text-shadow: -2px 0 blue; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 3s infinite linear alternate-reverse; }
 
-.glitch-img-constant { animation: imageGlitchExtreme 4s infinite; }
+@keyframes glitch-anim { 0% { clip: rect(10px, 9999px, 83px, 0); } 20% { clip: rect(65px, 9999px, 14px, 0); } 40% { clip: rect(43px, 9999px, 52px, 0); } 60% { clip: rect(89px, 9999px, 12px, 0); } 80% { clip: rect(22px, 9999px, 76px, 0); } 100% { clip: rect(54px, 9999px, 33px, 0); } }
+@keyframes glitch-anim2 { 0% { clip: rect(65px, 9999px, 100px, 0); } 20% { clip: rect(12px, 9999px, 54px, 0); } 40% { clip: rect(86px, 9999px, 23px, 0); } 60% { clip: rect(34px, 9999px, 87px, 0); } 80% { clip: rect(12px, 9999px, 43px, 0); } 100% { clip: rect(76px, 9999px, 21px, 0); } }
 
-@keyframes imageGlitchExtreme {
-    0% { transform: translate(0); filter: blur(0) contrast(1); }
-    1% { transform: translate(-5px, 3px); filter: blur(1px) contrast(2) hue-rotate(90deg); }
-    2% { transform: translate(5px, -3px); filter: blur(0) contrast(1) hue-rotate(0deg); }
-    3% { transform: translate(0); }
-    49% { transform: translate(0); }
-    50% { transform: translate(2px, 2px); clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%); }
-    51% { transform: translate(-2px, -2px); clip-path: polygon(0 40%, 100% 40%, 100% 50%, 0 50%); }
-    52% { transform: translate(0); clip-path: none; }
-    100% { transform: translate(0); }
-}
-
-/* Efecto Hover en Cartel y Portada */
-.glitch-hover {
-    transition: all 0.4s ease;
-    filter: grayscale(40%) contrast(1.2);
-}
-
-.glitch-hover:hover {
-    filter: grayscale(0%) contrast(1.4) drop-shadow(0 0 15px var(--accent-bruise));
-    transform: scale(1.03);
-    animation: imageGlitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-}
-
-@keyframes imageGlitch {
-    0% { transform: translate(0) scale(1.03); }
-    20% { transform: translate(-2px, 2px) scale(1.03); }
-    40% { transform: translate(-2px, -2px) scale(1.03); }
-    60% { transform: translate(2px, 2px) scale(1.03); }
-    80% { transform: translate(2px, -2px) scale(1.03); }
-    100% { transform: translate(0) scale(1.03); }
-}
-
-/* Glitch en Texto Hero */
-.glitch-text { position: relative; color: var(--text-main); }
-.glitch-text::before, .glitch-text::after {
-    content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
-}
-.glitch-text::before {
-    left: 2px; text-shadow: -2px 0 var(--accent-static);
-    clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 5s infinite linear alternate-reverse;
-}
-.glitch-text::after {
-    left: -2px; text-shadow: -2px 0 var(--accent-bruise);
-    clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 5s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim {
-    0% { clip: rect(10px, 9999px, 83px, 0); }
-    20% { clip: rect(65px, 9999px, 14px, 0); }
-    40% { clip: rect(43px, 9999px, 52px, 0); }
-    60% { clip: rect(89px, 9999px, 12px, 0); }
-    80% { clip: rect(22px, 9999px, 76px, 0); }
-    100% { clip: rect(54px, 9999px, 33px, 0); }
-}
-@keyframes glitch-anim2 {
-    0% { clip: rect(65px, 9999px, 100px, 0); }
-    20% { clip: rect(12px, 9999px, 54px, 0); }
-    40% { clip: rect(86px, 9999px, 23px, 0); }
-    60% { clip: rect(34px, 9999px, 87px, 0); }
-    80% { clip: rect(12px, 9999px, 43px, 0); }
-    100% { clip: rect(76px, 9999px, 21px, 0); }
-}
+.reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
 
 /* =========================================
-   REVEAL ANIMATIONS
+   RESPONSIVO PARA MÓVILES
    ========================================= */
-.reveal, .reveal-item { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
-.reveal.active, .reveal-item.active { opacity: 1; transform: translateY(0); }
-.content-split { display: flex; }
-
-/* =========================================
-   RESPONSIVE (MÓVILES)
-   ========================================= */
-@media (max-width: 768px) {
-    .crt-overlay::before { opacity: 0.05; } 
+@media (max-width: 900px) {
+    .hero-cinematic { flex-direction: column; justify-content: center; padding: 100px 5% 50px 5%; text-align: center; }
     
-    header { flex-direction: column; padding: 10px; background: rgba(0,0,0,0.95); }
-    .nav-logo { height: 35px; margin-bottom: 15px; }
-    nav ul { gap: 15px; flex-wrap: wrap; justify-content: center; }
-    nav a { font-size: 0.75rem; }
+    .giant-numbers-container { margin-bottom: 30px; }
+    .giant-number { font-size: 45vw; background-attachment: scroll; } /* Quita parallax en móvil por rendimiento */
     
-    .vanguard-title { font-size: 2.2rem; letter-spacing: 5px; }
-    .subtitle { font-size: 0.7rem; letter-spacing: 2px; }
+    .hero-info { text-align: center; margin: 0; max-width: 100%; }
+    .story-box { text-align: center; border-right: none; border-bottom: 3px solid var(--accent-neon); }
+    .story-box p { text-align: center; text-align-last: center; }
     
-    .launch-container, .show-container, .content-split { flex-direction: column; text-align: center; gap: 30px; }
-    .launch-container { padding: 0; }
-    .listen-links { justify-content: center; }
+    .floating-header { flex-direction: column; padding: 15px; background: rgba(0,0,0,0.9); }
+    .nav-logo { margin-bottom: 15px; }
     
-    .art-container, .image-side, .text-side { width: 100%; }
-    .cover-art { max-width: 280px; }
-    
-    .poster-img { max-width: 180px; margin: 0 auto; }
-    .show-container { padding: 20px; border-left: none; border-top: 3px solid var(--accent-static); }
+    .crt-box { flex-direction: column; text-align: center; border-left: none; border-top: 4px solid var(--accent-neon); }
     
     .floating-socials {
         flex-direction: row; top: auto; bottom: 15px; left: 50%;
-        transform: translateX(-50%); right: auto; padding: 12px 25px;
-        border-radius: 20px; background: rgba(10, 10, 12, 0.9);
+        transform: translateX(-50%); right: auto;
+        background: rgba(7, 3, 10, 0.9); padding: 10px 20px; border-radius: 30px;
     }
-    .floating-socials a { font-size: 1.2rem; }
 }
