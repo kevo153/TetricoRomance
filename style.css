@@ -1,10 +1,10 @@
 :root {
-    --bg-base: #07030a; 
+    --bg-base: #07030a; /* Negro carbón profundo */
     --bg-lighter: #110817;
-    --accent-bruise: #41166c; 
-    --accent-neon: #a855f7; 
-    --accent-orange: #ff7300; /* Naranja para el glow interior */
-    --text-main: #e2d5f8; 
+    --accent-bruise: #2d1b4a; /* Púrpura profundo moretón */
+    --accent-neon: #a855f7; /* Violeta neón incandescente */
+    --accent-electric: #00ffff; /* Cian neón para contraste */
+    --text-main: #e2d5f8; /* Blanco purpúreo deslavado */
     --text-muted: #8b75a5;
     --font-vanguard: 'Syncopate', sans-serif;
     --font-gothic: 'Cinzel', serif;
@@ -18,23 +18,23 @@ body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
+    position: relative;
 }
 
 /* =========================================
-   FONDO DIFUMINADO GLOBAL
+   FONDO DIFUMINADO GLOBAL (Sin Video)
    ========================================= */
 .fixed-background {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: -10;
-    /* Imagen del single de fondo */
+    /* Imagen del single difuminada detrás de todo */
     background: url('assets/cover-en-mis-heridas.jpg') center/cover no-repeat;
-    /* Difuminado agresivo y oscurecimiento */
-    filter: blur(25px) brightness(0.2) saturate(1.5);
-    transform: scale(1.1); /* Evita bordes blancos por el blur */
+    filter: blur(20px) brightness(0.2) saturate(1.5);
+    transform: scale(1.1); /* Evita bordes por blur */
 }
 
 /* =========================================
-   EFECTOS: RUIDO Y SCANLINES
+   EFECTOS: RUIDO, SCANLINES Y FLASHES
    ========================================= */
 .crt-overlay::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -56,8 +56,24 @@ body {
     background-size: 100% 4px; z-index: 99; pointer-events: none;
 }
 
+/* Flashes eléctricos de Neón (Relámpagos púrpuras aleatorios) */
+.neon-flash-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--accent-neon);
+    opacity: 0; z-index: 98; pointer-events: none;
+    animation: neonFlash 7s infinite;
+    mix-blend-mode: overlay;
+}
+
+@keyframes neonFlash {
+    0%, 95%, 98%, 100% { opacity: 0; }
+    96% { opacity: 0.1; }
+    97% { opacity: 0.3; }
+    99% { opacity: 0.15; }
+}
+
 /* =========================================
-   PÉTALOS / CENIZAS PÚRPURAS
+   PÉTALOS PÚRPURA (En toda la página)
    ========================================= */
 .petals-container {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -67,7 +83,7 @@ body {
 .petal {
     position: absolute;
     background: var(--accent-bruise);
-    border-radius: 150% 0 150% 0; 
+    border-radius: 150% 0 150% 0; /* Forma de pétalo marchito */
     box-shadow: 0 0 15px var(--accent-neon); /* Resplandor neón en los pétalos */
     animation: fall linear infinite;
 }
@@ -80,16 +96,17 @@ body {
 }
 
 /* =========================================
-   MENÚ Y REDES
+   MENÚ Y REDES (ESTILO FLOTANTE)
    ========================================= */
 .floating-header {
     position: fixed; width: 100%; top: 0; left: 0;
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 40px; z-index: 1000;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
 }
 
-.nav-logo { height: 45px; object-fit: contain; filter: drop-shadow(0 0 5px var(--accent-neon)); }
+.nav-logo { height: 45px; object-fit: contain; filter: drop-shadow(0 0 5px var(--accent-neon)); transition: 0.3s; }
+.nav-logo:hover { filter: drop-shadow(0 0 10px #fff); }
 
 .sleek-nav ul { display: flex; list-style: none; gap: 30px; }
 .sleek-nav a { 
@@ -117,14 +134,14 @@ body {
 }
 
 /* =========================================
-   SECCIÓN HERO: INVERTIDA Y CON GLOW
+   SECCIÓN HERO: ESTILO "1917" (NÚMEROS GIGANTES)
    ========================================= */
 .hero-cinematic {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-between; 
-    padding: 0 10% 0 10%; /* Ajuste de márgenes laterales */
+    padding: 0 10% 0 10%; /* Márgenes laterales */
     position: relative;
     z-index: 10;
 }
@@ -178,26 +195,42 @@ body {
     text-align: right;
 }
 
+/* ===== CORRECCIÓN DEL 0 Y EFECTO NEÓN REALISTA ===== */
 .giant-number {
-    font-family: var(--font-vanguard);
+    /* Se cambió a Montserrat para un 0 perfectamente redondo */
+    font-family: 'Montserrat', sans-serif; 
     font-size: 28vw; 
     font-weight: 900;
     margin: 0; padding: 0;
     
     background-color: var(--accent-bruise); 
     background-image: url('assets/cover-en-mis-heridas.jpg');
-    /* Se cambió el position para que apunte al lado derecho (la mujer abriendo su pecho) */
-    background-position: 80% center; 
-    background-size: 130%; /* Ligeramente más grande para que encaje mejor */
+    background-position: 80% center; /* Enfoque en la mujer */
+    background-size: 130%; 
     background-attachment: fixed; 
     
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     
-    /* El Glow Púrpura con toques Naranjas en el interior/borde */
-    -webkit-text-stroke: 2px rgba(255, 115, 0, 0.5); /* Borde anaranjado sutil */
-    filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.8)); /* Glow neón púrpura fuerte hacia afuera */
+    /* El Borde y Glow Incandescente Realista */
+    /* Resplandor violeta base + Resplandor cian eléctrico para contraste */
+    filter: 
+        drop-shadow(0 0 5px rgba(255, 255, 255, 0.5)) /* Núcleo brillante */
+        drop-shadow(0 0 15px var(--accent-neon)) /* Resplandor púrpura */
+        drop-shadow(0 0 25px var(--accent-electric)); /* Resplandor cian periférico */
+    
+    /* Borde incandescente sutil */
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1); 
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.giant-number:hover {
+    filter: 
+        drop-shadow(0 0 10px rgba(255, 255, 255, 0.8))
+        drop-shadow(0 0 25px var(--accent-neon))
+        drop-shadow(0 0 40px var(--accent-electric));
+    transform: scale(1.01);
 }
 
 /* =========================================
@@ -225,7 +258,7 @@ body {
 .show-info p { color: var(--text-main); font-size: 1rem; margin-bottom: 8px; }
 .show-info .bands { font-style: italic; color: var(--accent-neon); margin-top: 15px; }
 
-/* Galería */
+/* Galería Grid */
 .grid-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
 .gallery-item { height: 250px; overflow: hidden; position: relative; border: 1px solid rgba(168, 85, 247, 0.2); background: #000; }
 .gallery-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.3) brightness(0.6); transition: 0.5s; }
@@ -240,7 +273,7 @@ footer { text-align: center; padding: 40px; background: rgba(0,0,0,0.9); border-
 .glitch-text { position: relative; }
 .glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; }
 .glitch-text::before { left: 2px; text-shadow: -2px 0 var(--accent-neon); clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 3s infinite linear alternate-reverse; }
-.glitch-text::after { left: -2px; text-shadow: -2px 0 var(--accent-orange); clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 3s infinite linear alternate-reverse; }
+.glitch-text::after { left: -2px; text-shadow: -2px 0 var(--accent-electric); clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 3s infinite linear alternate-reverse; }
 
 @keyframes glitch-anim { 0% { clip: rect(10px, 9999px, 83px, 0); } 20% { clip: rect(65px, 9999px, 14px, 0); } 40% { clip: rect(43px, 9999px, 52px, 0); } 60% { clip: rect(89px, 9999px, 12px, 0); } 80% { clip: rect(22px, 9999px, 76px, 0); } 100% { clip: rect(54px, 9999px, 33px, 0); } }
 @keyframes glitch-anim2 { 0% { clip: rect(65px, 9999px, 100px, 0); } 20% { clip: rect(12px, 9999px, 54px, 0); } 40% { clip: rect(86px, 9999px, 23px, 0); } 60% { clip: rect(34px, 9999px, 87px, 0); } 80% { clip: rect(12px, 9999px, 43px, 0); } 100% { clip: rect(76px, 9999px, 21px, 0); } }
@@ -249,20 +282,27 @@ footer { text-align: center; padding: 40px; background: rgba(0,0,0,0.9); border-
 .reveal.active { opacity: 1; transform: translateY(0); }
 
 /* =========================================
-   RESPONSIVO PARA MÓVILES
+   CORRECCIÓN PARA MÓVILES (No tapa los números)
    ========================================= */
 @media (max-width: 900px) {
-    .hero-cinematic { flex-direction: column-reverse; justify-content: center; padding: 100px 5% 50px 5%; text-align: center; }
+    /* Stacked natural, no reverse para que los números queden abajo */
+    .hero-cinematic { flex-direction: column-reverse; justify-content: center; padding: 120px 5% 50px 5%; text-align: center; }
     
-    .giant-numbers-container { margin-bottom: 30px; text-align: center; }
-    .giant-number { font-size: 45vw; background-attachment: scroll; } 
+    /* Reajuste de márgenes para no colisionar con el menú */
+    .giant-numbers-container { margin-bottom: 20px; text-align: center; }
+    .giant-number { font-size: 45vw; background-attachment: scroll; line-height: 1; } /* Quita parallax en móvil */
     
-    .hero-info { text-align: center; margin: 0; max-width: 100%; }
+    .hero-info { text-align: center; margin: 0; max-width: 100%; padding-top: 30px; }
     .story-box { text-align: center; border-left: none; border-bottom: 3px solid var(--accent-neon); }
-    .story-box p { text-align: center; text-align-last: center; }
+    .story-box p { text-align: center; }
     
-    .floating-header { flex-direction: column; padding: 15px; background: rgba(0,0,0,0.9); }
-    .nav-logo { margin-bottom: 15px; }
+    /* Menú móvil optimizado */
+    .floating-header { 
+        flex-direction: column; padding: 10px; 
+        background: rgba(7, 3, 10, 0.95); /* Más sólido */
+        backdrop-filter: blur(5px);
+    }
+    .nav-logo { height: 30px; margin-bottom: 10px; }
     
     .crt-box { flex-direction: column; text-align: center; border-left: none; border-top: 4px solid var(--accent-neon); }
     

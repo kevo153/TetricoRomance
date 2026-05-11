@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tétrico Romance | En Mis Heridas</title>
+    <title>Tétrico Romance | En Mis Heridas Broadcast</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Syncopate:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="tv-static-bg">
 
-    <audio id="bg-audio" src="assets/nuevo_single.mp3" loop preload="auto"></audio>
-
-    <div class="fixed-background"></div>
-
     <div class="petals-container" id="petals"></div>
 
     <div class="crt-overlay"></div>
     <div class="scanlines"></div>
+    <div class="neon-flash-overlay"></div>
+
+    <audio id="bg-audio" src="assets/nuevo_single.mp3" preload="auto"></audio>
+
+    <div class="fixed-background"></div>
 
     <header class="floating-header">
         <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo glitch-img">
@@ -89,16 +90,16 @@
     </footer>
 
     <script>
-        // Lógica de Audio BGM con volumen bajo (Inicia al primer clic en la página)
+        // Lógica de Audio BGM con volumen bajo (Sin LOOP, inicia al primer clic)
         const bgAudio = document.getElementById('bg-audio');
-        bgAudio.volume = 0.2; // Volumen al 20%
+        bgAudio.volume = 0.3; // Volumen al 30%
         document.body.addEventListener('click', function() {
             if (bgAudio.paused) { bgAudio.play(); }
         }, { once: true });
 
-        // Crear pétalos/cenizas dinámicas
+        // Crear pétalos/cenizas dinámicas en TODA la página
         const petalsContainer = document.getElementById('petals');
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 35; i++) { // Aumentada la cantidad
             const petal = document.createElement('div');
             petal.className = 'petal';
             petal.style.left = Math.random() * 100 + 'vw';
