@@ -268,3 +268,68 @@ footer { text-align: center; padding: 40px; background: rgba(5,1,8,0.95); border
         background: rgba(5,1,8, 0.95); padding: 10px 20px; border-radius: 30px;
     }
 }
+/* =========================================
+   CONTROL DE AUDIO VISUAL (ECUALIZADOR)
+   ========================================= */
+#audio-control {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 45px;
+    height: 45px;
+    background: rgba(5, 1, 8, 0.8);
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+#audio-control:hover {
+    border-color: var(--accent-glow);
+    box-shadow: 0 0 20px var(--accent-glow);
+    transform: scale(1.1);
+}
+
+/* Las barritas del ecualizador */
+#audio-control .bar {
+    width: 3px;
+    background: var(--accent-glow);
+    border-radius: 2px;
+    animation: soundBounce 1s infinite ease-in-out alternate;
+    box-shadow: 0 0 5px var(--accent-glow);
+}
+
+/* Tiempos de rebote asimétricos para realismo */
+#audio-control .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+#audio-control .bar:nth-child(2) { height: 16px; animation-delay: 0.2s; }
+#audio-control .bar:nth-child(3) { height: 12px; animation-delay: 0.4s; }
+#audio-control .bar:nth-child(4) { height: 18px; animation-delay: 0.1s; }
+
+/* Estado Pausado (Barritas apagadas y planas) */
+#audio-control.paused .bar {
+    animation: none;
+    height: 4px !important;
+    background: var(--text-muted);
+    box-shadow: none;
+}
+
+@keyframes soundBounce {
+    0% { height: 4px; }
+    100% { height: 22px; }
+}
+
+@media (max-width: 900px) {
+    #audio-control {
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+    }
+}

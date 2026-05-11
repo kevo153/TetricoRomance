@@ -18,6 +18,13 @@
 
     <audio id="bg-audio" src="assets/nuevo_single.mp3" preload="auto"></audio>
 
+    <div id="audio-control" class="audio-toggle paused" title="Reproducir / Silenciar">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
     <div class="fixed-background">
         <div class="video-bg">
             <iframe src="https://www.youtube.com/embed/lgviQrW1VjA?autoplay=1&mute=1&loop=1&playlist=lgviQrW1VjA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -95,14 +102,34 @@
     </footer>
 
     <script>
-        // Lógica de Audio BGM (Inicia al primer clic)
+        // --- CONTROL Y VISUALIZADOR DE AUDIO ---
         const bgAudio = document.getElementById('bg-audio');
-        bgAudio.volume = 0.4; // Volumen un poco más presente
-        document.body.addEventListener('click', function() {
-            if (bgAudio.paused) { bgAudio.play(); }
+        const audioControl = document.getElementById('audio-control');
+        bgAudio.volume = 0.4; // Ajusta el volumen aquí si es muy alto/bajo
+
+        // Reproducir al primer clic en cualquier lugar (salta la restricción del navegador)
+        document.body.addEventListener('click', function initAudio() {
+            if (bgAudio.paused) { 
+                bgAudio.play(); 
+                audioControl.classList.remove('paused');
+            }
+            // Eliminamos este listener general para que los botones funcionen normal después
+            document.body.removeEventListener('click', initAudio); 
         }, { once: true });
 
-        // Crear pétalos/cenizas dinámicas
+        // Botón de Ecualizador para Pausar/Reproducir
+        audioControl.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evita conflicto con el clic del body
+            if (bgAudio.paused) {
+                bgAudio.play();
+                audioControl.classList.remove('paused');
+            } else {
+                bgAudio.pause();
+                audioControl.classList.add('paused');
+            }
+        });
+
+        // --- PÉTALOS DINÁMICOS ---
         const petalsContainer = document.getElementById('petals');
         for (let i = 0; i < 35; i++) { 
             const petal = document.createElement('div');
@@ -116,13 +143,12 @@
             petalsContainer.appendChild(petal);
         }
 
-        // Scroll Reveal Moderno
+        // --- SCROLL REVEAL ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
 </body>
