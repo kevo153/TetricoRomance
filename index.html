@@ -18,7 +18,12 @@
 
     <audio id="bg-audio" src="assets/nuevo_single.mp3" preload="auto"></audio>
 
-    <div class="fixed-background"></div>
+    <div class="fixed-background">
+        <div class="video-bg">
+            <iframe src="https://www.youtube.com/embed/lgviQrW1VjA?autoplay=1&mute=1&loop=1&playlist=lgviQrW1VjA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="overlay-dark"></div>
+    </div>
 
     <header class="floating-header">
         <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo glitch-img">
@@ -41,18 +46,18 @@
 
     <section class="hero-cinematic">
         
+        <div class="hero-cover-container">
+            <img src="assets/cover-en-mis-heridas.jpg" alt="Portada En Mis Heridas" class="hero-cover-art glitch-hover">
+            <div class="cover-glow-shadow"></div>
+        </div>
+
         <div class="hero-info" id="historia">
             <h1 class="vanguard-title glitch-text" data-text="EN MIS HERIDAS">EN MIS HERIDAS</h1>
-            <div class="story-box">
+            <div class="story-box neon-box">
                 <p>Nuevo single que fue concebido en las primeras etapas de <em>Pasión, Amor y Muerte</em> (álbum anterior), pero que no ve la luz hasta ahora como parte de nuestro nuevo álbum.</p>
                 <p>Canciones de alta magia. Este y otros temas más estarán disponibles próximamente de manera inédita aquí.</p>
             </div>
-            <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" class="btn-primary neon-btn">ESCUCHAR / PRE-SAVE</a>
-        </div>
-
-        <div class="giant-numbers-container">
-            <div class="giant-number">26</div>
-            <div class="giant-number">05</div>
+            <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" target="_blank" class="btn-primary neon-btn">ESCUCHAR / PRE-SAVE</a>
         </div>
 
     </section>
@@ -65,7 +70,7 @@
                 <h3>Sábado 09 de Mayo // 9:00 PM</h3>
                 <p><strong>La Cueva de la Patrona</strong> // Mérida, Yucatán.</p>
                 <p class="bands">Junto a The Plastic Pumpkins y Viceroy Eyes</p>
-                <p class="price" style="margin-top: 10px; color: #a855f7;">Acceso: $50 Pesos</p>
+                <p class="price" style="margin-top: 10px; color: #d8b4fe;">Acceso: $50 Pesos</p>
             </div>
         </div>
     </section>
@@ -90,16 +95,16 @@
     </footer>
 
     <script>
-        // Lógica de Audio BGM con volumen bajo (Sin LOOP, inicia al primer clic)
+        // Lógica de Audio BGM (Inicia al primer clic)
         const bgAudio = document.getElementById('bg-audio');
-        bgAudio.volume = 0.3; // Volumen al 30%
+        bgAudio.volume = 0.4; // Volumen un poco más presente
         document.body.addEventListener('click', function() {
             if (bgAudio.paused) { bgAudio.play(); }
         }, { once: true });
 
-        // Crear pétalos/cenizas dinámicas en TODA la página
+        // Crear pétalos/cenizas dinámicas
         const petalsContainer = document.getElementById('petals');
-        for (let i = 0; i < 35; i++) { // Aumentada la cantidad
+        for (let i = 0; i < 35; i++) { 
             const petal = document.createElement('div');
             petal.className = 'petal';
             petal.style.left = Math.random() * 100 + 'vw';
