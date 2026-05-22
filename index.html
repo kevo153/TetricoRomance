@@ -26,9 +26,8 @@
     </div>
 
     <div class="fixed-background">
-        <video autoplay muted loop playsinline id="bg-video-local">
+        <video autoplay muted loop playsinline id="bg-video-local" class="video-bg">
             <source src="assets/video-fondo.mp4" type="video/mp4">
-            <img src="assets/hero-bg.jpg" alt="Tétrico Romance">
         </video>
         <div class="overlay-dark"></div>
     </div>
@@ -76,12 +75,12 @@
         <div class="epk-grid">
             <div class="epk-text-box">
                 <span class="section-tagline">El Manifiesto</span>
-                <h2 class="skys-title">HISTORIA</h2>
-                <p class="epk-p">Nacidos de la urgencia de materializar la melancolía, el romanticismo trágico y la fuerza del rock gótico moderno, <strong>Tétrico Romance</strong> ha construido una densa trayectoria en la escena alternativa mexicana.</p>
-                <p class="epk-p">A través de texturas ultravioleta, atmósferas controladas y líricas punzantes, la agrupación invoca rituales sonoros que exploran las fronteras del dolor, el misticismo y la redención en cada pieza.</p>
+                <h2 class="skys-title">NUESTRA HISTORIA</h2>
+                <p class="epk-p">Originarios de Progreso, Yucatán, <strong>Tétrico Romance</strong> es la única banda de Gothic Rock en el sureste mexicano. Con más de 10 años de trayectoria, su sonido pesado y melancólico hereda la oscuridad de los 2000s, creando una amalgama perfecta entre el rock y el metal abierto.</p>
+                <p class="epk-p">Han llevado su ritual a escenarios junto a leyendas nacionales como <strong>La Castañeda</strong> y <strong>Saratoga</strong>, alcanzando un punto cumbre como acto de apertura para <strong>EPICA</strong> en su tour por México. Su obra trasciende fronteras, formando parte del compilado internacional <em>"GOTHIC MUSIC ORGY VOL. 7"</em> del sello alemán Darktunes Music.</p>
                 
-                <a href="assets/presskit-tetricoromance.pdf" download class="btn-presskit">
-                    <i class="fa-solid fa-file-pdf"></i> DESCARGAR PRESSKIT (EPK)
+                <a href="presskit.pdf" download="Tetrico_Romance_Presskit.pdf" target="_blank" class="btn-presskit">
+                    <i class="fa-solid fa-file-pdf"></i> DESCARGAR PRESSKIT OFICIAL
                 </a>
             </div>
             <div class="epk-image-box">
@@ -99,23 +98,23 @@
         <div class="timeline-container">
             
             <div class="timeline-card past-event">
-                <div class="badge-status consumado">Ritual Consumado</div>
-                <div class="card-date">Sáb. 09 Mayo // 21:00 H</div>
+                <div class="card-date">18 Mayo // 2025</div>
                 <div class="card-details">
-                    <h3>La Cueva de la Patrona</h3>
-                    <p class="loc">Mérida, Yucatán</p>
-                    <p class="lineup">Co-billing: The Plastic Pumpkins + Viceroy Eyes</p>
+                    <h3>EPICA - Tour México 2025</h3>
+                    <p class="loc">Auditorio La Isla // Mérida, Yucatán</p>
+                    <p class="lineup">Tétrico Romance como Banda Invitada (Opening Act)</p>
                 </div>
+                <div class="badge-status consumado">Ritual Consumado</div>
             </div>
 
             <div class="timeline-card upcoming-event">
-                <div class="badge-status proximamente">Próximamente</div>
                 <div class="card-date">Jue. 13 Junio // 20:00 H</div>
                 <div class="card-details">
                     <h3>Anuncio del Próximo Altar</h3>
                     <p class="loc">Sede por Revelar // Venta de accesos próximamente</p>
                     <p class="lineup">Setlist especial expandido: Presentación oficial del nuevo álbum</p>
                 </div>
+                <div class="badge-status proximamente">PRÓXIMAMENTE</div>
             </div>
 
         </div>
@@ -150,10 +149,11 @@
 
     <footer>
         <p class="text-muted">TÉTRICO ROMANCE BCAST // 2026 // HIGH MAGIC SYNDICATE</p>
+        <p class="text-muted" style="margin-top: 10px;"><i class="fa-brands fa-whatsapp"></i> Contrataciones: 999 129 8612</p>
     </footer>
 
     <script>
-        // Control de Audio
+        // Audio
         const bgAudio = document.getElementById('bg-audio');
         const audioControl = document.getElementById('audio-control');
         bgAudio.volume = 0.35;
@@ -169,14 +169,13 @@
             else { bgAudio.pause(); audioControl.classList.add('paused'); }
         });
 
-        // CANVAS: Cenizas Volcánicas Estilo Editorial
+        // Partículas HTML5
         const canvas = document.getElementById('dark-magic-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
 
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
 
         const mouse = { x: null, y: null, radius: 120 };
         window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
@@ -184,64 +183,40 @@
 
         class Particle {
             constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 2; 
-                this.speedX = Math.random() * 0.6 - 0.3;
-                this.speedY = -(Math.random() * 0.8 + 0.4); 
-                this.angle = Math.random() * 360;
-                this.spin = Math.random() * 1 - 0.5;
-                this.opacity = Math.random() * 0.4 + 0.15;
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 2; this.speedX = Math.random() * 0.6 - 0.3;
+                this.speedY = -(Math.random() * 0.8 + 0.4); this.angle = Math.random() * 360;
+                this.spin = Math.random() * 1 - 0.5; this.opacity = Math.random() * 0.4 + 0.15;
             }
             update() {
-                this.y += this.speedY;
-                this.x += this.speedX + Math.sin(this.y / 50) * 0.3;
-                this.angle += this.spin;
-
+                this.y += this.speedY; this.x += this.speedX + Math.sin(this.y / 50) * 0.3; this.angle += this.spin;
                 if (mouse.x && mouse.y) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
+                    let dx = mouse.x - this.x, dy = mouse.y - this.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
                     if (distance < mouse.radius) {
                         if (mouse.x > this.x && this.x > 10) this.x -= 1.5;
                         if (mouse.x < this.x && this.x < canvas.width - 10) this.x += 1.5;
                     }
                 }
-                if (this.y < -20) {
-                    this.y = canvas.height + 20;
-                    this.x = Math.random() * canvas.width;
-                }
+                if (this.y < -20) { this.y = canvas.height + 20; this.x = Math.random() * canvas.width; }
             }
             draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle * Math.PI / 180);
-                ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`; // Color púrpura ceniza
-                ctx.beginPath();
+                ctx.save(); ctx.translate(this.x, this.y); ctx.rotate(this.angle * Math.PI / 180);
+                ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`; ctx.beginPath();
                 ctx.moveTo(0, 0); ctx.lineTo(this.size, -this.size/2); ctx.lineTo(this.size*1.2, this.size); ctx.lineTo(-this.size/2, this.size*1.4);
                 ctx.closePath(); ctx.fill(); ctx.restore();
             }
         }
-
-        function initParticles() {
-            particlesArray = [];
-            for (let i = 0; i < 50; i++) { particlesArray.push(new Particle()); }
-        }
+        function initParticles() { particlesArray = []; for (let i = 0; i < 50; i++) particlesArray.push(new Particle()); }
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); particlesArray[i].draw(); }
+            particlesArray.forEach(p => { p.update(); p.draw(); });
             requestAnimationFrame(animateParticles);
         }
         initParticles(); animateParticles();
 
-        // GALERÍA LIGHTBOX INTERACTIVA
-        const galleryImgs = document.querySelectorAll('.gallery-img');
-        const lightbox = document.getElementById('lightbox-modal');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxCaption = document.getElementById('lightbox-caption');
-        const closeBtn = document.querySelector('.lightbox-close');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
+        // Lightbox
+        const galleryImgs = document.querySelectorAll('.gallery-img'), lightbox = document.getElementById('lightbox-modal'), lightboxImg = document.getElementById('lightbox-img'), lightboxCaption = document.getElementById('lightbox-caption'), closeBtn = document.querySelector('.lightbox-close'), prevBtn = document.querySelector('.prev-btn'), nextBtn = document.querySelector('.next-btn');
         let currentImgIndex = 0;
 
         const openLightbox = (index) => {
@@ -251,31 +226,21 @@
             lightbox.classList.add('visible');
         };
 
-        galleryImgs.forEach(img => {
-            img.addEventListener('click', (e) => { openLightbox(e.target.getAttribute('data-index')); });
-        });
-
-        const closeLightbox = () => { lightbox.classList.remove('visible'); };
+        galleryImgs.forEach(img => img.addEventListener('click', (e) => openLightbox(e.target.getAttribute('data-index'))));
+        const closeLightbox = () => lightbox.classList.remove('visible');
         closeBtn.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
 
         const showNextImg = () => { currentImgIndex = (currentImgIndex + 1) % galleryImgs.length; openLightbox(currentImgIndex); };
         const showPrevImg = () => { currentImgIndex = (currentImgIndex - 1 + galleryImgs.length) % galleryImgs.length; openLightbox(currentImgIndex); };
-
-        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextImg(); });
-        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevImg(); });
-
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextImg(); }); prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevImg(); });
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('visible')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowRight') showNextImg();
-            if (e.key === 'ArrowLeft') showPrevImg();
+            if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowRight') showNextImg(); if (e.key === 'ArrowLeft') showPrevImg();
         });
 
         // Scroll Reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.05 });
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.05 });
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
 </body>
