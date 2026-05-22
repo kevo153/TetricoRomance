@@ -26,9 +26,10 @@
     </div>
 
     <div class="fixed-background">
-        <div class="video-bg">
-            <iframe src="https://www.youtube.com/embed/lgviQrW1VjA?autoplay=1&mute=1&loop=1&playlist=lgviQrW1VjA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
+        <video autoplay muted loop playsinline id="bg-video-local">
+            <source src="assets/video-fondo.mp4" type="video/mp4">
+            <img src="assets/hero-bg.jpg" alt="Tétrico Romance">
+        </video>
         <div class="overlay-dark"></div>
     </div>
 
@@ -113,7 +114,7 @@
                 <div class="card-details">
                     <h3>Anuncio del Próximo Altar</h3>
                     <p class="loc">Sede por Revelar // Venta de accesos próximamente</p>
-                    <p class="lineup">Setlist especial expandido: Presentación oficial del álbum</p>
+                    <p class="lineup">Setlist especial expandido: Presentación oficial del nuevo álbum</p>
                 </div>
             </div>
 
@@ -138,13 +139,13 @@
     </section>
 
     <div id="lightbox-modal" class="lightbox">
-        <span class="lightbox-close">&times;</span>
-        <button class="lightbox-btn prev-btn">&#10094;</button>
+        <span class="lightbox-close">×</span>
+        <button class="lightbox-btn prev-btn">❮</button>
         <div class="lightbox-content-wrapper">
             <img id="lightbox-img" src="" alt="Visualización ampliada">
             <p id="lightbox-caption"></p>
         </div>
-        <button class="lightbox-btn next-btn">&#10095;</button>
+        <button class="lightbox-btn next-btn">❯</button>
     </div>
 
     <footer>
@@ -152,7 +153,7 @@
     </footer>
 
     <script>
-        // 1. Audio y Reproductor Inicial
+        // Control de Audio
         const bgAudio = document.getElementById('bg-audio');
         const audioControl = document.getElementById('audio-control');
         bgAudio.volume = 0.35;
@@ -168,7 +169,7 @@
             else { bgAudio.pause(); audioControl.classList.add('paused'); }
         });
 
-        // 2. CANVAS: EFECTO CENIZA VOLCÁNICA ESTILO EDITORIAL
+        // CANVAS: Cenizas Volcánicas Estilo Editorial
         const canvas = document.getElementById('dark-magic-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
@@ -185,9 +186,9 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 2; // Cenizas más pequeñas, sutiles y elegantes
+                this.size = Math.random() * 5 + 2; 
                 this.speedX = Math.random() * 0.6 - 0.3;
-                this.speedY = -(Math.random() * 0.8 + 0.4); // Suben flotando imitando calor/ceniza
+                this.speedY = -(Math.random() * 0.8 + 0.4); 
                 this.angle = Math.random() * 360;
                 this.spin = Math.random() * 1 - 0.5;
                 this.opacity = Math.random() * 0.4 + 0.15;
@@ -215,18 +216,10 @@
                 ctx.save();
                 ctx.translate(this.x, this.y);
                 ctx.rotate(this.angle * Math.PI / 180);
-                // Tono ceniza oscura purpúrea deslavada
-                ctx.fillStyle = `rgba(139, 117, 165, ${this.opacity})`;
-                
-                // Dibujo de un polígono irregular de ceniza
+                ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`; // Color púrpura ceniza
                 ctx.beginPath();
-                ctx.moveTo(0, 0);
-                ctx.lineTo(this.size, -this.size/2);
-                ctx.lineTo(this.size*1.2, this.size);
-                ctx.lineTo(-this.size/2, this.size*1.4);
-                ctx.closePath();
-                ctx.fill();
-                ctx.restore();
+                ctx.moveTo(0, 0); ctx.lineTo(this.size, -this.size/2); ctx.lineTo(this.size*1.2, this.size); ctx.lineTo(-this.size/2, this.size*1.4);
+                ctx.closePath(); ctx.fill(); ctx.restore();
             }
         }
 
@@ -236,16 +229,12 @@
         }
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
+            for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); particlesArray[i].draw(); }
             requestAnimationFrame(animateParticles);
         }
-        initParticles();
-        animateParticles();
+        initParticles(); animateParticles();
 
-        // 3. SISTEMA DE GALERÍA LIGHTBOX INTERACTIVO
+        // GALERÍA LIGHTBOX INTERACTIVA
         const galleryImgs = document.querySelectorAll('.gallery-img');
         const lightbox = document.getElementById('lightbox-modal');
         const lightboxImg = document.getElementById('lightbox-img');
@@ -257,37 +246,25 @@
 
         const openLightbox = (index) => {
             currentImgIndex = parseInt(index);
-            const src = galleryImgs[currentImgIndex].getAttribute('src');
-            const alt = galleryImgs[currentImgIndex].getAttribute('alt');
-            
-            lightboxImg.setAttribute('src', src);
-            lightboxCaption.textContent = alt;
+            lightboxImg.setAttribute('src', galleryImgs[currentImgIndex].getAttribute('src'));
+            lightboxCaption.textContent = galleryImgs[currentImgIndex].getAttribute('alt');
             lightbox.classList.add('visible');
         };
 
         galleryImgs.forEach(img => {
-            img.addEventListener('click', (e) => {
-                openLightbox(e.target.getAttribute('data-index'));
-            });
+            img.addEventListener('click', (e) => { openLightbox(e.target.getAttribute('data-index')); });
         });
 
         const closeLightbox = () => { lightbox.classList.remove('visible'); };
         closeBtn.addEventListener('click', closeLightbox);
         lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
 
-        const showNextImg = () => {
-            currentImgIndex = (currentImgIndex + 1) % galleryImgs.length;
-            openLightbox(currentImgIndex);
-        };
-        const showPrevImg = () => {
-            currentImgIndex = (currentImgIndex - 1 + galleryImgs.length) % galleryImgs.length;
-            openLightbox(currentImgIndex);
-        };
+        const showNextImg = () => { currentImgIndex = (currentImgIndex + 1) % galleryImgs.length; openLightbox(currentImgIndex); };
+        const showPrevImg = () => { currentImgIndex = (currentImgIndex - 1 + galleryImgs.length) % galleryImgs.length; openLightbox(currentImgIndex); };
 
         nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextImg(); });
         prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevImg(); });
 
-        // Soporte para flechas del teclado
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('visible')) return;
             if (e.key === 'Escape') closeLightbox();
@@ -295,7 +272,7 @@
             if (e.key === 'ArrowLeft') showPrevImg();
         });
 
-        // 4. Scroll Reveal
+        // Scroll Reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.05 });
