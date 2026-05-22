@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tétrico Romance | En Mis Heridas Broadcast</title>
+    <title>Tétrico Romance | Official Broadcast</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Syncopate:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="tv-static-bg">
 
-    <div class="petals-container" id="petals"></div>
+    <canvas id="dark-magic-canvas"></canvas>
 
     <div class="crt-overlay"></div>
     <div class="scanlines"></div>
@@ -18,7 +18,7 @@
 
     <audio id="bg-audio" src="assets/nuevo_single.mp3" preload="auto"></audio>
 
-    <div id="audio-control" class="audio-toggle paused" title="Reproducir / Silenciar">
+    <div id="audio-control" class="audio-toggle paused" title="Activar / Silenciar Frecuencia">
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
@@ -33,10 +33,10 @@
     </div>
 
     <header class="floating-header">
-        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo glitch-img">
+        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo">
         <nav class="sleek-nav">
             <ul>
-                <li><a href="#historia">El Single</a></li>
+                <li><a href="#ritual-single">El Conjuro</a></li>
                 <li><a href="#shows">Rituales</a></li>
                 <li><a href="#galeria">Evidencia</a></li>
             </ul>
@@ -51,20 +51,22 @@
         <a href="https://www.facebook.com/TRPaginaOficial/" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     </div>
 
-    <section class="hero-cinematic">
+    <section class="hero-cinematic" id="ritual-single">
         
         <div class="hero-cover-container">
-            <img src="assets/cover-en-mis-heridas.jpg" alt="Portada En Mis Heridas" class="hero-cover-art glitch-hover">
+            <div class="neon-frame">
+                <img src="assets/cover-en-mis-heridas.jpg" alt="Portada En Mis Heridas" class="hero-cover-art">
+            </div>
             <div class="cover-glow-shadow"></div>
         </div>
 
-        <div class="hero-info" id="historia">
+        <div class="hero-info">
             <h1 class="vanguard-title glitch-text" data-text="EN MIS HERIDAS">EN MIS HERIDAS</h1>
             <div class="story-box neon-box">
-                <p>Nuevo single que fue concebido en las primeras etapas de <em>Pasión, Amor y Muerte</em> (álbum anterior), pero que no ve la luz hasta ahora como parte de nuestro nuevo álbum.</p>
-                <p>Canciones de alta magia. Este y otros temas más estarán disponibles próximamente de manera inédita aquí.</p>
+                <p class="magik-text">Nuevo sencillo que fue concebido en las primeras etapas de <em>Pasión, Amor y Muerte</em> (álbum anterior), pero que no ve la luz hasta ahora como parte de nuestro nuevo álbum.</p>
+                <p class="magik-text">Canciones de alta magia. Este y otros temas más estarán disponibles próximamente de manera inédita aquí.</p>
             </div>
-            <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" target="_blank" class="btn-primary neon-btn">ESCUCHAR / PRE-SAVE</a>
+            <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" target="_blank" class="btn-primary neon-btn">PRE-SAVE DIGITAL</a>
         </div>
 
     </section>
@@ -72,12 +74,12 @@
     <section id="shows" class="section-dark reveal">
         <h2 class="section-title">Próximo Ritual</h2>
         <div class="show-container crt-box">
-            <img src="assets/cartel-mayo.jpg" alt="Cartel Sábado 09 de Mayo" class="poster-img glitch-hover">
+            <img src="assets/cartel-mayo.jpg" alt="Cartel Sábado 09 de Mayo" class="poster-img">
             <div class="show-info">
                 <h3>Sábado 09 de Mayo // 9:00 PM</h3>
                 <p><strong>La Cueva de la Patrona</strong> // Mérida, Yucatán.</p>
                 <p class="bands">Junto a The Plastic Pumpkins y Viceroy Eyes</p>
-                <p class="price" style="margin-top: 10px; color: #d8b4fe;">Acceso: $50 Pesos</p>
+                <p class="price">Acceso: $50 Pesos</p>
             </div>
         </div>
     </section>
@@ -98,28 +100,25 @@
     </section>
 
     <footer>
-        <p class="text-muted">TÉTRICO ROMANCE BCAST // 2026</p>
+        <p class="text-muted">TÉTRICO ROMANCE BCAST // 2026 // HIGH MAGIC SYNDICATE</p>
     </footer>
 
     <script>
-        // --- CONTROL Y VISUALIZADOR DE AUDIO ---
+        // 1. Control del Reproductor e Interacción Inicial
         const bgAudio = document.getElementById('bg-audio');
         const audioControl = document.getElementById('audio-control');
-        bgAudio.volume = 0.4; // Ajusta el volumen aquí si es muy alto/bajo
+        bgAudio.volume = 0.35;
 
-        // Reproducir al primer clic en cualquier lugar (salta la restricción del navegador)
         document.body.addEventListener('click', function initAudio() {
             if (bgAudio.paused) { 
                 bgAudio.play(); 
                 audioControl.classList.remove('paused');
             }
-            // Eliminamos este listener general para que los botones funcionen normal después
             document.body.removeEventListener('click', initAudio); 
         }, { once: true });
 
-        // Botón de Ecualizador para Pausar/Reproducir
         audioControl.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evita conflicto con el clic del body
+            e.stopPropagation(); 
             if (bgAudio.paused) {
                 bgAudio.play();
                 audioControl.classList.remove('paused');
@@ -129,25 +128,90 @@
             }
         });
 
-        // --- PÉTALOS DINÁMICOS ---
-        const petalsContainer = document.getElementById('petals');
-        for (let i = 0; i < 35; i++) { 
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDelay = Math.random() * 8 + 's';
-            petal.style.opacity = Math.random() * 0.7 + 0.3;
-            const size = Math.random() * 10 + 5; 
-            petal.style.width = size + 'px';
-            petal.style.height = size + 'px';
-            petalsContainer.appendChild(petal);
+        // 2. MOTOR DE PARTÍCULAS HTML5 CANVAS (Cenizas/Pétalos interactivos)
+        const canvas = document.getElementById('dark-magic-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Detectar movimiento del ratón para repeler pétalos de forma fluida
+        const mouse = { x: null, y: null, radius: 100 };
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 8 + 4;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1.5 + 0.8;
+                this.angle = Math.random() * 360;
+                this.spin = Math.random() * 2 - 1;
+                this.opacity = Math.random() * 0.5 + 0.3;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.y / 30) * 0.5; // Movimiento sinuoso
+                this.angle += this.spin;
+
+                // Interacción fluida con el puntero del ratón
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        if (mouse.x > this.x && this.x > 10) this.x -= 2;
+                        if (mouse.x < this.x && this.x < canvas.width - 10) this.x += 2;
+                    }
+                }
+                if (this.y > canvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle * Math.PI / 180);
+                ctx.fillStyle = 'rgba(168, 85, 247, ' + this.opacity + ')'; // Tono Neón Púrpura
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#a855f7';
+                
+                // Dibujar forma de pétalo gótico con vectores bezier
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(this.size, -this.size, this.size * 2, this.size, 0, this.size * 2);
+                ctx.bezierCurveTo(-this.size * 2, this.size, -this.size, -this.size, 0, 0);
+                ctx.fill();
+                ctx.restore();
+            }
         }
 
-        // --- SCROLL REVEAL ---
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < 40; i++) { particlesArray.push(new Particle()); }
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        initParticles();
+        animateParticles();
+
+        // 3. Intersection Observer (Aparición por Scroll)
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
