@@ -26,17 +26,21 @@
     </div>
 
     <div class="fixed-background">
+        <video autoplay muted loop playsinline id="bg-video-local" class="video-bg">
+            <source src="assets/video-fondo.mp4" type="video/mp4">
+        </video>
         <div class="overlay-dark"></div>
     </div>
 
     <header class="floating-header">
-        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo">
+        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo" id="secret-trigger">
         <nav class="sleek-nav">
             <ul>
                 <li><a href="#nuevo-single">Nuevo Single</a></li>
                 <li><a href="#historia">Historia</a></li>
                 <li><a href="#rituales">Rituales</a></li>
-                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#discografia">Discografía</a></li>
+                <li><a href="#merch">Merch</a></li>
             </ul>
         </nav>
     </header>
@@ -93,7 +97,6 @@
         <h2 class="skys-title text-center">RITUALES</h2>
         
         <div class="timeline-container">
-            
             <div class="timeline-card past-event">
                 <div class="card-date">18 Mayo // 2025</div>
                 <div class="card-details">
@@ -113,11 +116,43 @@
                 </div>
                 <div class="badge-status proximamente">PRÓXIMAMENTE</div>
             </div>
-
         </div>
     </section>
 
-    <section id="galeria" class="section-dark reveal">
+    <section id="discografia" class="section-dark reveal">
+        <span class="section-tagline text-center-tag">Nuestra Génesis</span>
+        <h2 class="skys-title text-center">PASIÓN, AMOR Y MUERTE</h2>
+        
+        <div class="album-grid">
+            <div class="album-cover-box">
+                <img src="assets/pasion-amor-muerte.jpg" alt="Portada Pasión, Amor y Muerte" class="album-img glitch-hover">
+            </div>
+            <div class="album-info-box">
+                <p class="magik-text">Nacido en 2012, <em>Pasión, Amor y Muerte</em> es una obra conceptual que traza un viaje visceral a través de las tres etapas que le dan nombre. Cada tema explora la problemática de un alma fracturada, navegando por los ciclos de la aceptación, el dolor ciego, la devoción y la enfermedad emocional.</p>
+                <p class="magik-text">Desde pasajes icónicos en inglés como <em>Nocturnal Birds</em>, hasta baladas hipnotizantes y el desenlace agridulce de <em>Pagliacci</em>, este álbum es el relato de una tragedia inquebrantable.</p>
+                
+                <ul class="tracklist">
+                    <li>01. Prólogo</li>
+                    <li>02. En la Eternidad</li>
+                    <li>03. Ilusión</li>
+                    <li>04. Nocturnal Birds</li>
+                    <li>05. Bruja (feat. Anavi)</li>
+                    <li>06. Interludio</li>
+                    <li>07. Redención</li>
+                    <li class="highlight-track"><i class="fa-solid fa-play"></i> 08. Bajo las Alas de la Noche</li>
+                    <li>09. Arder en Ti</li>
+                    <li>10. La Trágica Pérdida de la Razón</li>
+                    <li>11. Pagliacci</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="youtube-embed-container">
+            <iframe src="https://www.youtube.com/embed/lgviQrW1VjA?controls=1" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <section id="galeria" class="section-accent reveal">
         <span class="section-tagline text-center-tag">Evidencia Visual</span>
         <h2 class="skys-title text-center">GALERÍA</h2>
         
@@ -134,6 +169,17 @@
         </div>
     </section>
 
+    <section id="merch" class="section-dark reveal">
+        <div class="nocturnal-container">
+            <img src="assets/nocturnal.jpg" alt="Nocturnal Fears Logo" class="nocturnal-logo">
+            <h2 class="skys-title text-center" style="font-size: 2.2rem; margin-top: 25px;">NOCTURNAL FEARS</h2>
+            <p class="magik-text text-center" style="max-width: 600px; margin: 0 auto 30px auto;">Más que indumentaria, una segunda piel para quienes caminan entre las sombras. <em>Nocturnal Fears by Tétrico Romance</em> resurge de las cenizas. Una línea de diseño vanguardista y gótico, con piezas limitadas para aquellos que portan la oscuridad como estandarte. El velo se levantará pronto.</p>
+            <div class="text-center">
+                <a href="#" class="btn-primary neon-btn">ÚNETE AL CULTO (PRÓXIMAMENTE)</a>
+            </div>
+        </div>
+    </section>
+
     <div id="lightbox-modal" class="lightbox">
         <span class="lightbox-close">×</span>
         <button class="lightbox-btn prev-btn">❮</button>
@@ -144,13 +190,22 @@
         <button class="lightbox-btn next-btn">❯</button>
     </div>
 
+    <div id="secret-modal" class="lightbox secret-modal-overlay">
+        <div class="neon-box" style="text-align: center; max-width: 450px; padding: 50px;">
+            <i class="fa-solid fa-crow" style="font-size: 3.5rem; color: var(--accent-neon); margin-bottom: 25px; filter: drop-shadow(0 0 10px var(--accent-glow));"></i>
+            <h3 style="font-family: var(--font-gothic); font-size: 2rem; color: #fff; margin-bottom: 15px; text-shadow: 0 0 10px var(--accent-neon);">El Velo Se Abre</h3>
+            <p class="magik-text" style="text-align: center; font-size: 1rem;">Los espíritus curiosos tienen su recompensa. Presenta una captura de esta pantalla secreta en nuestro próximo ritual para reclamar tu ofrenda.</p>
+            <button id="close-secret" class="btn-primary neon-btn" style="margin-top: 25px;">REGRESAR A LAS SOMBRAS</button>
+        </div>
+    </div>
+
     <footer>
         <p class="text-muted">TÉTRICO ROMANCE BCAST // 2026 // HIGH MAGIC SYNDICATE</p>
-        <p class="text-muted" style="margin-top: 10px;"><i class="fa-brands fa-whatsapp"></i> Contrataciones: 999 129 8612</p>
+        <p class="text-muted" style="margin-top: 10px;"><i class="fa-brands fa-whatsapp" style="color: #a855f7;"></i> Contrataciones: 999 129 8612</p>
     </footer>
 
     <script>
-        // Audio
+        // 1. Audio
         const bgAudio = document.getElementById('bg-audio');
         const audioControl = document.getElementById('audio-control');
         bgAudio.volume = 0.35;
@@ -166,7 +221,7 @@
             else { bgAudio.pause(); audioControl.classList.add('paused'); }
         });
 
-        // Partículas HTML5
+        // 2. Partículas HTML5
         const canvas = document.getElementById('dark-magic-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
@@ -212,7 +267,7 @@
         }
         initParticles(); animateParticles();
 
-        // Lightbox
+        // 3. Lightbox de Galería
         const galleryImgs = document.querySelectorAll('.gallery-img'), lightbox = document.getElementById('lightbox-modal'), lightboxImg = document.getElementById('lightbox-img'), lightboxCaption = document.getElementById('lightbox-caption'), closeBtn = document.querySelector('.lightbox-close'), prevBtn = document.querySelector('.prev-btn'), nextBtn = document.querySelector('.next-btn');
         let currentImgIndex = 0;
 
@@ -236,7 +291,27 @@
             if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowRight') showNextImg(); if (e.key === 'ArrowLeft') showPrevImg();
         });
 
-        // Scroll Reveal
+        // 4. LÓGICA DEL MISTERIO OCULTO (EASTER EGG)
+        const secretTrigger = document.getElementById('secret-trigger');
+        const secretModal = document.getElementById('secret-modal');
+        let clickCount = 0;
+        let clickTimer;
+        
+        secretTrigger.addEventListener('click', () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            if(clickCount === 5) {
+                secretModal.classList.add('visible');
+                clickCount = 0; 
+            }
+            clickTimer = setTimeout(() => { clickCount = 0; }, 2000); 
+        });
+
+        document.getElementById('close-secret').addEventListener('click', () => {
+            secretModal.classList.remove('visible');
+        });
+
+        // 5. Scroll Reveal
         const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.05 });
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
