@@ -1,12 +1,11 @@
 :root {
-    --bg-base: #050108; /* Negro purpúreo abismal */
-    --bg-lighter: #0f0518;
-    --accent-bruise: #41166c; /* Púrpura profundo */
+    --bg-base: #040106; /* Negro absoluto purpúreo */
+    --bg-lighter: #0c0413;
+    --accent-dark: #321054; /* Morado moretón profundo */
     --accent-neon: #a855f7; /* Violeta neón puro */
-    --accent-glow: #d8b4fe; /* Lila súper brillante para el núcleo del neón */
-    --accent-shadow: #2e1065; /* Sombra índigo */
-    --text-main: #e2d5f8;
-    --text-muted: #8b75a5;
+    --accent-glow: #e9d5ff; /* Lila incandescente para el filamento */
+    --text-main: #f3e8ff; 
+    --text-muted: #7c3aed;
     --font-vanguard: 'Syncopate', sans-serif;
     --font-gothic: 'Cinzel', serif;
 }
@@ -19,11 +18,19 @@ body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
-    position: relative;
 }
 
 /* =========================================
-   VIDEO DE FONDO GÓTICO
+   LIENZO HTML5 INTERACTIVO
+   ========================================= */
+#dark-magic-canvas {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 4; /* Delante del video, detrás del contenido interactivo */
+    pointer-events: none;
+}
+
+/* =========================================
+   CINEMÁTICA Y VIDEO DE FONDO (ESTILO AND DEINER SEITE)
    ========================================= */
 .fixed-background {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -34,212 +41,205 @@ body {
 .video-bg iframe {
     position: absolute; top: 50%; left: 50%;
     width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; 
-    transform: translate(-50%, -50%); pointer-events: none; 
-    /* Tiñe el video sutilmente hacia el púrpura y lo oscurece */
-    filter: sepia(30%) hue-rotate(250deg) saturate(1.5) brightness(0.6) contrast(1.2);
+    transform: translate(-50%, -50%);
+    /* Tinte cinemático gótico de alta saturación */
+    filter: grayscale(20%) sepia(40%) hue-rotate(245deg) saturate(2) brightness(0.4) contrast(1.2);
 }
 
-/* El viñeteado oscuro que permite leer las letras sobre el video */
 .overlay-dark {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, rgba(65, 22, 108, 0.3) 0%, rgba(5, 1, 8, 0.95) 100%);
+    background: radial-gradient(circle at center, rgba(12, 4, 19, 0.2) 0%, rgba(4, 1, 6, 0.95) 100%);
     z-index: -7;
 }
 
 /* =========================================
-   EFECTOS: RUIDO Y SCANLINES
+   FILTROS CRT Y NOISE
    ========================================= */
 .crt-overlay::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-image: radial-gradient(#fff 10%, transparent 15%), radial-gradient(#fff 10%, transparent 15%);
     background-size: 3px 3px; background-position: 0 0, 1.5px 1.5px;
-    opacity: 0.05; z-index: 100; pointer-events: none;
+    opacity: 0.04; z-index: 100; pointer-events: none;
     animation: staticNoise 0.2s infinite;
 }
-
-@keyframes staticNoise { 0% { transform: translate(0, 0); } 50% { transform: translate(1px, 1px); } 100% { transform: translate(-1px, -1px); } }
+@keyframes staticNoise { 0% { transform: translate(0,0); } 50% { transform: translate(1px,1px); } 100% { transform: translate(-1px,-1px); } }
 
 .scanlines {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.25) 50%);
     background-size: 100% 4px; z-index: 99; pointer-events: none;
 }
 
 .neon-flash-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--accent-glow); opacity: 0; z-index: 98; pointer-events: none;
-    animation: neonFlash 8s infinite; mix-blend-mode: overlay;
+    background: var(--accent-neon); opacity: 0; z-index: 98; pointer-events: none;
+    animation: neonFlash 10s infinite; mix-blend-mode: overlay;
 }
-
-@keyframes neonFlash { 0%, 95%, 98%, 100% { opacity: 0; } 96% { opacity: 0.1; } 97% { opacity: 0.25; } 99% { opacity: 0.15; } }
+@keyframes neonFlash { 0%, 94%, 97%, 100% { opacity: 0; } 95% { opacity: 0.15; } 96% { opacity: 0.3; } 98% { opacity: 0.1; } }
 
 /* =========================================
-   PÉTALOS PÚRPURA
-   ========================================= */
-.petals-container {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    pointer-events: none; z-index: 5; overflow: hidden;
-}
-
-.petal {
-    position: absolute; background: var(--accent-neon);
-    border-radius: 150% 0 150% 0; 
-    box-shadow: 0 0 15px var(--accent-glow); 
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; filter: blur(0px); }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; filter: blur(2px); }
-}
-
-/* =========================================
-   MENÚ Y REDES (ESTILO FLOTANTE)
+   MENÚ SUPERIOR DE CRISTAL ESMERILADO
    ========================================= */
 .floating-header {
     position: fixed; width: 100%; top: 0; left: 0;
     display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 40px; z-index: 1000;
-    background: linear-gradient(to bottom, rgba(5,1,8,0.9), transparent);
+    padding: 15px 5%; z-index: 1000;
+    background: linear-gradient(to bottom, rgba(4, 1, 6, 0.95), rgba(4, 1, 6, 0));
 }
 
-.nav-logo { height: 45px; object-fit: contain; filter: drop-shadow(0 0 5px var(--accent-neon)); transition: 0.3s; }
-.nav-logo:hover { filter: drop-shadow(0 0 10px var(--accent-glow)); }
+.nav-logo { height: 42px; object-fit: contain; filter: drop-shadow(0 0 8px var(--accent-neon)); }
 
-.sleek-nav ul { display: flex; list-style: none; gap: 30px; }
+.sleek-nav ul { display: flex; list-style: none; gap: 35px; }
 .sleek-nav a { 
     color: var(--text-main); text-decoration: none; font-size: 0.75rem; 
-    text-transform: uppercase; letter-spacing: 3px; font-weight: 600; transition: 0.3s;
+    text-transform: uppercase; letter-spacing: 4px; font-weight: 600; transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.sleek-nav a:hover { color: var(--accent-glow); text-shadow: 0 0 12px var(--accent-glow); }
+.sleek-nav a:hover { color: #fff; text-shadow: 0 0 10px var(--accent-neon), 0 0 20px var(--accent-neon); }
 
-.floating-socials {
-    position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 20px; z-index: 999;
-}
-
+/* Redes Sociales Flotantes */
+.floating-socials { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 20px; z-index: 999; }
 .floating-socials a { 
-    color: var(--text-main); font-size: 1.3rem; transition: 0.3s; 
+    color: var(--text-main); font-size: 1.2rem; transition: 0.3s ease; 
     display: flex; justify-content: center; align-items: center;
-    width: 40px; height: 40px; border-radius: 50%;
-    border: 1px solid rgba(168, 85, 247, 0.4);
-    background: rgba(5,1,8,0.6); backdrop-filter: blur(5px);
-    box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    background: rgba(4, 1, 6, 0.7); backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 .floating-socials a:hover { 
-    color: #fff; background: var(--accent-bruise);
-    border-color: var(--accent-glow); box-shadow: 0 0 20px var(--accent-glow);
-    transform: scale(1.1);
+    color: #fff; background: var(--accent-dark); border-color: var(--accent-glow);
+    box-shadow: 0 0 25px var(--accent-neon); transform: scale(1.1) rotate(5deg);
 }
 
 /* =========================================
-   SECCIÓN HERO: PORTADA CENTRAL Y GLOW
+   SECCIÓN HERO: EQUILIBRIO VISUAL IMPACTANTE
    ========================================= */
 .hero-cinematic {
     min-height: 100vh; display: flex; align-items: center; justify-content: center; 
-    padding: 100px 10% 0 10%; position: relative; z-index: 10; gap: 60px;
+    padding: 120px 8% 60px 8%; position: relative; z-index: 10; gap: 80px;
 }
 
-/* Tratamiento de Portada del Single */
-.hero-cover-container {
-    flex: 1; display: flex; justify-content: center; align-items: center; position: relative;
+.hero-cover-container { flex: 1.1; display: flex; justify-content: center; align-items: center; position: relative; }
+
+/* El marco de Neon realista de doble capa alrededor del cassette */
+.neon-frame {
+    padding: 3px; border-radius: 6px;
+    background: linear-gradient(135deg, var(--accent-glow), var(--accent-neon));
+    box-shadow: 
+        0 0 15px rgba(233, 213, 255, 0.6),
+        0 0 35px rgba(168, 85, 247, 0.8),
+        0 0 70px rgba(168, 85, 247, 0.4);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    z-index: 2;
 }
 
-.hero-cover-art {
-    width: 100%; max-width: 450px; border-radius: 5px; z-index: 2;
-    border: 2px solid rgba(216, 180, 254, 0.3);
-    /* Sombras base purpuras proyectadas hacia afuera */
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.5), 0 0 80px rgba(46, 16, 101, 0.8);
-    transition: all 0.5s ease;
+.hero-cover-art { width: 100%; max-width: 440px; height: auto; border-radius: 4px; display: block; }
+
+.hero-cover-container:hover .neon-frame {
+    transform: scale(1.02) rotate(-1deg);
+    box-shadow: 
+        0 0 25px rgba(233, 213, 255, 0.9),
+        0 0 50px rgba(168, 85, 247, 1),
+        0 0 100px rgba(168, 85, 247, 0.6);
 }
 
-.hero-cover-art:hover {
-    transform: scale(1.02);
-    border-color: var(--accent-glow);
-    box-shadow: 0 0 50px rgba(216, 180, 254, 0.6), 0 0 100px rgba(168, 85, 247, 0.9);
-}
-
+/* Sombras realistas proyectadas hacia el fondo */
 .cover-glow-shadow {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 90%; height: 90%; background: var(--accent-neon);
-    filter: blur(80px); opacity: 0.4; z-index: 1; pointer-events: none;
+    width: 85%; height: 85%; background: var(--accent-dark);
+    filter: blur(70px); opacity: 0.6; z-index: 1; pointer-events: none;
 }
 
-/* Historia alineada */
-.hero-info { flex: 1; max-width: 500px; text-align: left; }
+/* Textos e Historia */
+.hero-info { flex: 1; max-width: 520px; text-align: left; }
 
 .vanguard-title { 
-    font-family: var(--font-vanguard); font-size: 2.8rem; text-transform: uppercase; 
-    letter-spacing: 5px; margin-bottom: 25px; color: #fff;
-    text-shadow: 0 0 15px var(--accent-neon), 0 0 30px var(--accent-shadow);
+    font-family: var(--font-vanguard); font-size: 3.2rem; text-transform: uppercase; 
+    letter-spacing: 6px; margin-bottom: 30px; color: #fff;
+    text-shadow: 0 0 15px var(--accent-neon), 0 0 40px rgba(168, 85, 247, 0.5);
 }
 
-/* Caja de Neon con sombras realistas */
+/* Cristal Esmerilado (Neon Box) */
 .neon-box {
-    background: rgba(10, 2, 15, 0.7);
-    border: 1px solid rgba(168, 85, 247, 0.3);
-    border-left: 4px solid var(--accent-glow);
-    padding: 25px; margin-bottom: 35px; backdrop-filter: blur(10px);
-    box-shadow: 0 0 25px rgba(46, 16, 101, 0.6), inset 0 0 15px rgba(46, 16, 101, 0.5);
+    background: rgba(12, 4, 19, 0.65);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    border-left: 5px solid var(--accent-neon);
+    padding: 30px; margin-bottom: 40px;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 20px rgba(168, 85, 247, 0.1);
 }
 
-.neon-box p { font-size: 0.95rem; color: var(--text-main); margin-bottom: 15px; text-align: justify; }
-.neon-box p:last-child { margin-bottom: 0; }
+.magik-text { font-size: 0.95rem; color: var(--text-main); margin-bottom: 20px; text-align: justify; font-weight: 300; letter-spacing: 0.5px; }
+.magik-text:last-child { margin-bottom: 0; }
 
 .neon-btn {
-    display: inline-block; padding: 15px 40px; background: rgba(46, 16, 101, 0.5); color: #fff; 
-    border: 1px solid var(--accent-neon); font-weight: 700; letter-spacing: 3px; font-size: 0.8rem;
-    cursor: pointer; transition: 0.3s;
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4), inset 0 0 10px rgba(168, 85, 247, 0.2);
+    display: inline-block; padding: 16px 45px; background: rgba(50, 16, 84, 0.3); color: #fff; 
+    border: 1px solid var(--accent-neon); font-family: var(--font-vanguard); font-weight: 700; 
+    letter-spacing: 4px; font-size: 0.75rem; text-decoration: none;
+    cursor: pointer; transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3), inset 0 0 15px rgba(168, 85, 247, 0.2);
 }
-
 .neon-btn:hover { 
-    background: var(--accent-bruise); border-color: var(--accent-glow); color: #fff;
-    box-shadow: 0 0 30px var(--accent-glow), inset 0 0 20px rgba(216, 180, 254, 0.5);
-    text-shadow: 0 0 5px #fff;
+    background: var(--accent-neon); color: #000; border-color: var(--accent-glow);
+    box-shadow: 0 0 35px var(--accent-neon), 0 0 10px #fff;
 }
 
 /* =========================================
-   SECCIONES SECUNDARIAS
+   SECCIONES SECUNDARIAS DE ALTA CLASE
    ========================================= */
-.section-dark { padding: 100px 10%; position: relative; z-index: 10; background: rgba(5,1,8,0.85); border-top: 1px solid rgba(168, 85, 247, 0.1); }
-.section-accent { padding: 100px 10%; background: rgba(15,5,24,0.9); position: relative; z-index: 10; border-top: 1px solid rgba(168, 85, 247, 0.1); backdrop-filter: blur(10px); }
+.section-dark { padding: 110px 10%; position: relative; z-index: 10; background: rgba(4,1,6,0.88); border-top: 1px solid rgba(168, 85, 247, 0.1); }
+.section-accent { padding: 110px 10%; background: rgba(12,4,19,0.93); position: relative; z-index: 10; border-top: 1px solid rgba(168, 85, 247, 0.15); backdrop-filter: blur(8px); }
 
 .section-title { 
-    font-family: var(--font-gothic); font-size: 2.5rem; margin-bottom: 50px; text-align: center; letter-spacing: 3px;
-    color: var(--text-main); text-shadow: 0 0 15px var(--accent-neon);
+    font-family: var(--font-gothic); font-size: 2.8rem; margin-bottom: 60px; text-align: center; letter-spacing: 4px; font-weight: 400;
+    text-shadow: 0 0 20px var(--accent-neon);
 }
 
 .crt-box {
-    background: rgba(0,0,0,0.8); padding: 40px; border: 1px solid rgba(168, 85, 247, 0.4);
-    border-left: 4px solid var(--accent-glow); display: flex; gap: 40px; align-items: center; max-width: 900px; margin: 0 auto;
-    box-shadow: inset 0 0 40px rgba(46, 16, 101, 0.8), 0 0 20px rgba(0,0,0,0.9);
+    background: rgba(4, 1, 6, 0.85); padding: 50px; border: 1px solid rgba(168, 85, 247, 0.3);
+    border-left: 5px solid var(--accent-glow); display: flex; gap: 50px; align-items: center; max-width: 950px; margin: 0 auto;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(50, 16, 84, 0.4);
 }
-.poster-img { max-width: 250px; filter: grayscale(40%) sepia(30%) hue-rotate(240deg) contrast(1.2); transition: 0.4s; border: 1px solid var(--accent-bruise); }
-.poster-img:hover { filter: grayscale(0%) contrast(1.1); box-shadow: 0 0 25px var(--accent-neon); border-color: var(--accent-glow); }
-.show-info h3 { font-family: var(--font-gothic); font-size: 1.8rem; color: #fff; margin-bottom: 10px; text-shadow: 0 0 10px var(--accent-neon); }
-.show-info p { color: var(--text-main); font-size: 1rem; margin-bottom: 8px; }
-.show-info .bands { font-style: italic; color: var(--accent-glow); margin-top: 15px; }
+.poster-img { max-width: 260px; filter: grayscale(30%) contrast(1.1) brightness(0.9); transition: 0.4s ease; border: 1px solid var(--accent-dark); }
+.poster-img:hover { filter: grayscale(0%) contrast(1.2); box-shadow: 0 0 30px var(--accent-neon); border-color: var(--accent-glow); }
+.show-info h3 { font-family: var(--font-gothic); font-size: 2rem; color: #fff; margin-bottom: 12px; text-shadow: 0 0 10px var(--accent-neon); }
+.show-info p { color: var(--text-main); font-size: 1.05rem; margin-bottom: 8px; font-weight: 300; }
+.show-info .bands { font-style: italic; color: var(--accent-glow); margin-top: 20px; font-size: 0.95rem; }
 
-/* Galería Grid */
-.grid-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-.gallery-item { height: 250px; overflow: hidden; position: relative; border: 1px solid rgba(168, 85, 247, 0.2); background: #000; }
-.gallery-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.3) brightness(0.6); transition: 0.5s; }
-.gallery-item:hover .gallery-img { filter: grayscale(0%) sepia(20%) hue-rotate(250deg) contrast(1.1) brightness(1); transform: scale(1.05); }
-.gallery-item:hover { border-color: var(--accent-glow); box-shadow: 0 0 20px rgba(168, 85, 247, 0.5); z-index: 10; }
+/* Galería Grid Con Efecto Líquido */
+.grid-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.gallery-item { height: 260px; overflow: hidden; position: relative; border: 1px solid rgba(168, 85, 247, 0.2); background: #000; transition: 0.4s ease; }
+.gallery-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.4) brightness(0.5); transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.gallery-item:hover .gallery-img { filter: grayscale(0%) contrast(1.1) brightness(1.05); transform: scale(1.06); }
+.gallery-item:hover { border-color: var(--accent-glow); box-shadow: 0 0 25px rgba(168, 85, 247, 0.6); z-index: 10; }
 
-footer { text-align: center; padding: 40px; background: rgba(5,1,8,0.95); border-top: 1px solid rgba(168, 85, 247, 0.2); font-size: 0.7rem; letter-spacing: 3px; position: relative; z-index: 10; color: var(--text-muted); }
+footer { text-align: center; padding: 45px; background: #020003; border-top: 1px solid rgba(168, 85, 247, 0.2); font-size: 0.75rem; letter-spacing: 4px; position: relative; z-index: 10; color: rgba(255,255,255,0.3); }
 
 /* =========================================
-   GLITCH EXCLUSIVAMENTE PÚRPURA
+   REPRODUCTOR VECTORIAL MINIATURA
+   ========================================= */
+#audio-control {
+    position: fixed; bottom: 30px; left: 30px; width: 48px; height: 48px;
+    background: rgba(4, 1, 6, 0.85); border: 1px solid rgba(168, 85, 247, 0.5); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; gap: 3px; cursor: pointer; z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); backdrop-filter: blur(5px); transition: all 0.3s ease;
+}
+#audio-control:hover { border-color: var(--accent-glow); box-shadow: 0 0 20px var(--accent-neon); transform: scale(1.1); }
+#audio-control .bar { width: 3px; background: var(--accent-glow); border-radius: 2px; animation: soundBounce 1s infinite ease-in-out alternate; box-shadow: 0 0 6px var(--accent-neon); }
+#audio-control .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+#audio-control .bar:nth-child(2) { height: 20px; animation-delay: 0.2s; }
+#audio-control .bar:nth-child(3) { height: 14px; animation-delay: 0.4s; }
+#audio-control .bar:nth-child(4) { height: 22px; animation-delay: 0.1s; }
+#audio-control.paused .bar { animation: none; height: 4px !important; background: rgba(255,255,255,0.2); box-shadow: none; }
+@keyframes soundBounce { 0% { height: 4px; } 100% { height: 24px; } }
+
+/* =========================================
+   GLITCH PURA LUZ ULTRAVIOLETA
    ======================================== */
 .glitch-text { position: relative; }
 .glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; }
 .glitch-text::before { left: 2px; text-shadow: -2px 0 var(--accent-glow); clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 3s infinite linear alternate-reverse; }
-.glitch-text::after { left: -2px; text-shadow: -2px 0 var(--accent-bruise); clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 3s infinite linear alternate-reverse; }
-
+.glitch-text::after { left: -2px; text-shadow: -2px 0 var(--accent-dark); clip: rect(44px, 450px, 56px, 0); animation: glitch-anim2 3s infinite linear alternate-reverse; }
 @keyframes glitch-anim { 0% { clip: rect(10px, 9999px, 83px, 0); } 20% { clip: rect(65px, 9999px, 14px, 0); } 40% { clip: rect(43px, 9999px, 52px, 0); } 60% { clip: rect(89px, 9999px, 12px, 0); } 80% { clip: rect(22px, 9999px, 76px, 0); } 100% { clip: rect(54px, 9999px, 33px, 0); } }
 @keyframes glitch-anim2 { 0% { clip: rect(65px, 9999px, 100px, 0); } 20% { clip: rect(12px, 9999px, 54px, 0); } 40% { clip: rect(86px, 9999px, 23px, 0); } 60% { clip: rect(34px, 9999px, 87px, 0); } 80% { clip: rect(12px, 9999px, 43px, 0); } 100% { clip: rect(76px, 9999px, 21px, 0); } }
 
@@ -247,89 +247,27 @@ footer { text-align: center; padding: 40px; background: rgba(5,1,8,0.95); border
 .reveal.active { opacity: 1; transform: translateY(0); }
 
 /* =========================================
-   RESPONSIVO PARA MÓVILES
+   OPTIMIZACIÓN DE MÓVILES AVANZADA
    ========================================= */
 @media (max-width: 900px) {
-    .hero-cinematic { flex-direction: column; padding: 120px 5% 50px 5%; text-align: center; gap: 40px; }
-    
+    .hero-cinematic { flex-direction: column; padding: 130px 5% 50px 5%; text-align: center; gap: 40px; }
     .hero-info { text-align: center; margin: 0; max-width: 100%; }
-    .neon-box { border-left: none; border-bottom: 3px solid var(--accent-glow); padding: 20px; }
+    .neon-box { border-left: none; border-bottom: 4px solid var(--accent-neon); padding: 22px; }
     .neon-box p { text-align: center; }
+    .hero-cover-art { max-width: 310px; }
     
-    .hero-cover-art { max-width: 300px; }
+    .floating-header { flex-direction: column; padding: 12px; background: rgba(4, 1, 6, 0.98); backdrop-filter: blur(10px); }
+    .nav-logo { height: 32px; margin-bottom: 12px; }
+    .sleek-nav ul { gap: 20px; }
+    .sleek-nav a { font-size: 0.7rem; letter-spacing: 2px; }
     
-    .floating-header { flex-direction: column; padding: 10px; background: rgba(5,1,8,0.95); backdrop-filter: blur(5px); }
-    .nav-logo { height: 30px; margin-bottom: 10px; }
-    
-    .crt-box { flex-direction: column; text-align: center; border-left: none; border-top: 4px solid var(--accent-glow); }
+    .crt-box { flex-direction: column; text-align: center; border-left: none; border-top: 4px solid var(--accent-glow); padding: 30px 20px; }
+    .poster-img { max-width: 190px; margin: 0 auto; }
     
     .floating-socials {
         flex-direction: row; top: auto; bottom: 15px; left: 50%; transform: translateX(-50%); right: auto;
-        background: rgba(5,1,8, 0.95); padding: 10px 20px; border-radius: 30px;
+        background: rgba(4, 1, 6, 0.95); padding: 8px 15px; border-radius: 30px; gap: 15px;
     }
-}
-/* =========================================
-   CONTROL DE AUDIO VISUAL (ECUALIZADOR)
-   ========================================= */
-#audio-control {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    width: 45px;
-    height: 45px;
-    background: rgba(5, 1, 8, 0.8);
-    border: 1px solid rgba(168, 85, 247, 0.5);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
-}
-
-#audio-control:hover {
-    border-color: var(--accent-glow);
-    box-shadow: 0 0 20px var(--accent-glow);
-    transform: scale(1.1);
-}
-
-/* Las barritas del ecualizador */
-#audio-control .bar {
-    width: 3px;
-    background: var(--accent-glow);
-    border-radius: 2px;
-    animation: soundBounce 1s infinite ease-in-out alternate;
-    box-shadow: 0 0 5px var(--accent-glow);
-}
-
-/* Tiempos de rebote asimétricos para realismo */
-#audio-control .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
-#audio-control .bar:nth-child(2) { height: 16px; animation-delay: 0.2s; }
-#audio-control .bar:nth-child(3) { height: 12px; animation-delay: 0.4s; }
-#audio-control .bar:nth-child(4) { height: 18px; animation-delay: 0.1s; }
-
-/* Estado Pausado (Barritas apagadas y planas) */
-#audio-control.paused .bar {
-    animation: none;
-    height: 4px !important;
-    background: var(--text-muted);
-    box-shadow: none;
-}
-
-@keyframes soundBounce {
-    0% { height: 4px; }
-    100% { height: 22px; }
-}
-
-@media (max-width: 900px) {
-    #audio-control {
-        bottom: 20px;
-        left: 20px;
-        width: 40px;
-        height: 40px;
-    }
+    .floating-socials a { width: 38px; height: 38px; font-size: 1.1rem; }
+    #audio-control { bottom: 15px; left: 15px; width: 38px; height: 38px; }
 }
