@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tétrico Romance | En Mis Heridas Broadcast</title>
+    <title>Tétrico Romance | Official Broadcast</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Syncopate:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Syncopate:wght@400;700;900&family=Montserrat:wght@200;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="tv-static-bg">
 
-    <div class="petals-container" id="petals"></div>
+    <canvas id="dark-magic-canvas"></canvas>
 
     <div class="crt-overlay"></div>
     <div class="scanlines"></div>
@@ -18,7 +18,7 @@
 
     <audio id="bg-audio" src="assets/nuevo_single.mp3" preload="auto"></audio>
 
-    <div id="audio-control" class="audio-toggle paused" title="Reproducir / Silenciar">
+    <div id="audio-control" class="audio-toggle paused" title="Frecuencia Sonora">
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
@@ -33,12 +33,13 @@
     </div>
 
     <header class="floating-header">
-        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo glitch-img">
+        <img src="assets/logo-texto.png" alt="Tétrico Romance" class="nav-logo">
         <nav class="sleek-nav">
             <ul>
-                <li><a href="#historia">El Single</a></li>
-                <li><a href="#shows">Rituales</a></li>
-                <li><a href="#galeria">Evidencia</a></li>
+                <li><a href="#nuevo-single">Nuevo Single</a></li>
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#rituales">Rituales</a></li>
+                <li><a href="#galeria">Galería</a></li>
             </ul>
         </nav>
     </header>
@@ -51,104 +52,253 @@
         <a href="https://www.facebook.com/TRPaginaOficial/" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     </div>
 
-    <section class="hero-cinematic">
-        
+    <section class="hero-cinematic" id="nuevo-single">
         <div class="hero-cover-container">
-            <img src="assets/cover-en-mis-heridas.jpg" alt="Portada En Mis Heridas" class="hero-cover-art glitch-hover">
+            <div class="neon-frame">
+                <img src="assets/cover-en-mis-heridas.jpg" alt="Portada En Mis Heridas" class="hero-cover-art">
+            </div>
             <div class="cover-glow-shadow"></div>
         </div>
 
-        <div class="hero-info" id="historia">
+        <div class="hero-info">
+            <span class="section-tagline">Último Lanzamiento</span>
             <h1 class="vanguard-title glitch-text" data-text="EN MIS HERIDAS">EN MIS HERIDAS</h1>
             <div class="story-box neon-box">
-                <p>Nuevo single que fue concebido en las primeras etapas de <em>Pasión, Amor y Muerte</em> (álbum anterior), pero que no ve la luz hasta ahora como parte de nuestro nuevo álbum.</p>
-                <p>Canciones de alta magia. Este y otros temas más estarán disponibles próximamente de manera inédita aquí.</p>
+                <p class="magik-text">Un corte musical concebido en las entrañas de las sesiones originales de <em>Pasión, Amor y Muerte</em>. Resguardado bajo llave hasta este momento, emerge transformado como la piedra angular de nuestra nueva era discográfica.</p>
+                <p class="magik-text">Canciones de alta magia e introspección oscura. Disponible de manera inédita en plataformas digitales.</p>
             </div>
-            <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" target="_blank" class="btn-primary neon-btn">ESCUCHAR / PRE-SAVE</a>
-        </div>
-
-    </section>
-
-    <section id="shows" class="section-dark reveal">
-        <h2 class="section-title">Próximo Ritual</h2>
-        <div class="show-container crt-box">
-            <img src="assets/cartel-mayo.jpg" alt="Cartel Sábado 09 de Mayo" class="poster-img glitch-hover">
-            <div class="show-info">
-                <h3>Sábado 09 de Mayo // 9:00 PM</h3>
-                <p><strong>La Cueva de la Patrona</strong> // Mérida, Yucatán.</p>
-                <p class="bands">Junto a The Plastic Pumpkins y Viceroy Eyes</p>
-                <p class="price" style="margin-top: 10px; color: #d8b4fe;">Acceso: $50 Pesos</p>
-            </div>
+            <a href="https://open.spotify.com/intl-es/artist/6WDbdHigsKflPtcj1ogzXJ?si=tyr5vF_QRoO2uac0oWOhmA" target="_blank" class="btn-primary neon-btn">PRE-SAVE DIGITAL</a>
         </div>
     </section>
 
-    <section id="galeria" class="section-accent reveal">
-        <h2 class="section-title text-bleed">Evidencia En Vivo</h2>
+    <section id="historia" class="section-dark reveal">
+        <div class="epk-grid">
+            <div class="epk-text-box">
+                <span class="section-tagline">El Manifiesto</span>
+                <h2 class="skys-title">HISTORIA</h2>
+                <p class="epk-p">Nacidos de la urgencia de materializar la melancolía, el romanticismo trágico y la fuerza del rock gótico moderno, <strong>Tétrico Romance</strong> ha construido una densa trayectoria en la escena alternativa mexicana.</p>
+                <p class="epk-p">A través de texturas ultravioleta, atmósferas controladas y líricas punzantes, la agrupación invoca rituales sonoros que exploran las fronteras del dolor, el misticismo y la redención en cada pieza.</p>
+                
+                <a href="assets/presskit-tetricoromance.pdf" download class="btn-presskit">
+                    <i class="fa-solid fa-file-pdf"></i> DESCARGAR PRESSKIT (EPK)
+                </a>
+            </div>
+            <div class="epk-image-box">
+                <div class="epk-frame-decor">
+                    <img src="assets/live-1.jpg" alt="Tétrico Romance en directo" class="epk-img-main">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rituales" class="section-accent reveal">
+        <span class="section-tagline text-center-tag">Fechas oficiales</span>
+        <h2 class="skys-title text-center">RITUALES</h2>
+        
+        <div class="timeline-container">
+            
+            <div class="timeline-card past-event">
+                <div class="badge-status consumado">Ritual Consumado</div>
+                <div class="card-date">Sáb. 09 Mayo // 21:00 H</div>
+                <div class="card-details">
+                    <h3>La Cueva de la Patrona</h3>
+                    <p class="loc">Mérida, Yucatán</p>
+                    <p class="lineup">Co-billing: The Plastic Pumpkins + Viceroy Eyes</p>
+                </div>
+            </div>
+
+            <div class="timeline-card upcoming-event">
+                <div class="badge-status proximamente">Próximamente</div>
+                <div class="card-date">Jue. 13 Junio // 20:00 H</div>
+                <div class="card-details">
+                    <h3>Anuncio del Próximo Altar</h3>
+                    <p class="loc">Sede por Revelar // Venta de accesos próximamente</p>
+                    <p class="lineup">Setlist especial expandido: Presentación oficial del álbum</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="galeria" class="section-dark reveal">
+        <span class="section-tagline text-center-tag">Evidencia Visual</span>
+        <h2 class="skys-title text-center">GALERÍA</h2>
+        
         <div class="grid-gallery">
-            <div class="gallery-item"><img src="assets/live-1.jpg" class="gallery-img"></div>
-            <div class="gallery-item"><img src="assets/live-2.jpg" class="gallery-img"></div>
-            <div class="gallery-item"><img src="assets/live-3.jpg" class="gallery-img"></div>
-            <div class="gallery-item"><img src="assets/live-4.jpg" class="gallery-img"></div>
-            <div class="gallery-item"><img src="assets/live-5.jpg" class="gallery-img"></div>
-            <div class="gallery-item"><img src="assets/live-6.jpg" class="gallery-img"></div>
-            <div class="gallery-item"><img src="assets/live-7.jpg" class="gallery-img"></div>
-            <div class="gallery-item"><img src="assets/live-8.jpg" class="gallery-img"></div>
-            <div class="gallery-item"><img src="assets/live-9.jpg" class="gallery-img"></div>
+            <div class="gallery-item"><img src="assets/live-1.jpg" class="gallery-img" data-index="0" alt="Evidencia En Vivo I"></div>
+            <div class="gallery-item"><img src="assets/live-2.jpg" class="gallery-img" data-index="1" alt="Evidencia En Vivo II"></div>
+            <div class="gallery-item"><img src="assets/live-3.jpg" class="gallery-img" data-index="2" alt="Evidencia En Vivo III"></div>
+            <div class="gallery-item"><img src="assets/live-4.jpg" class="gallery-img" data-index="3" alt="Evidencia En Vivo IV"></div>
+            <div class="gallery-item"><img src="assets/live-5.jpg" class="gallery-img" data-index="4" alt="Evidencia En Vivo V"></div>
+            <div class="gallery-item"><img src="assets/live-6.jpg" class="gallery-img" data-index="5" alt="Evidencia En Vivo VI"></div>
+            <div class="gallery-item"><img src="assets/live-7.jpg" class="gallery-img" data-index="6" alt="Evidencia En Vivo VII"></div>
+            <div class="gallery-item"><img src="assets/live-8.jpg" class="gallery-img" data-index="7" alt="Evidencia En Vivo VIII"></div>
+            <div class="gallery-item"><img src="assets/live-9.jpg" class="gallery-img" data-index="8" alt="Evidencia En Vivo IX"></div>
         </div>
     </section>
+
+    <div id="lightbox-modal" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <button class="lightbox-btn prev-btn">&#10094;</button>
+        <div class="lightbox-content-wrapper">
+            <img id="lightbox-img" src="" alt="Visualización ampliada">
+            <p id="lightbox-caption"></p>
+        </div>
+        <button class="lightbox-btn next-btn">&#10095;</button>
+    </div>
 
     <footer>
-        <p class="text-muted">TÉTRICO ROMANCE BCAST // 2026</p>
+        <p class="text-muted">TÉTRICO ROMANCE BCAST // 2026 // HIGH MAGIC SYNDICATE</p>
     </footer>
 
     <script>
-        // --- CONTROL Y VISUALIZADOR DE AUDIO ---
+        // 1. Audio y Reproductor Inicial
         const bgAudio = document.getElementById('bg-audio');
         const audioControl = document.getElementById('audio-control');
-        bgAudio.volume = 0.4; // Ajusta el volumen aquí si es muy alto/bajo
+        bgAudio.volume = 0.35;
 
-        // Reproducir al primer clic en cualquier lugar (salta la restricción del navegador)
         document.body.addEventListener('click', function initAudio() {
-            if (bgAudio.paused) { 
-                bgAudio.play(); 
-                audioControl.classList.remove('paused');
-            }
-            // Eliminamos este listener general para que los botones funcionen normal después
+            if (bgAudio.paused) { bgAudio.play(); audioControl.classList.remove('paused'); }
             document.body.removeEventListener('click', initAudio); 
         }, { once: true });
 
-        // Botón de Ecualizador para Pausar/Reproducir
         audioControl.addEventListener('click', function(e) {
-            e.stopPropagation(); // Evita conflicto con el clic del body
-            if (bgAudio.paused) {
-                bgAudio.play();
-                audioControl.classList.remove('paused');
-            } else {
-                bgAudio.pause();
-                audioControl.classList.add('paused');
-            }
+            e.stopPropagation(); 
+            if (bgAudio.paused) { bgAudio.play(); audioControl.classList.remove('paused'); }
+            else { bgAudio.pause(); audioControl.classList.add('paused'); }
         });
 
-        // --- PÉTALOS DINÁMICOS ---
-        const petalsContainer = document.getElementById('petals');
-        for (let i = 0; i < 35; i++) { 
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDelay = Math.random() * 8 + 's';
-            petal.style.opacity = Math.random() * 0.7 + 0.3;
-            const size = Math.random() * 10 + 5; 
-            petal.style.width = size + 'px';
-            petal.style.height = size + 'px';
-            petalsContainer.appendChild(petal);
+        // 2. CANVAS: EFECTO CENIZA VOLCÁNICA ESTILO EDITORIAL
+        const canvas = document.getElementById('dark-magic-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const mouse = { x: null, y: null, radius: 120 };
+        window.addEventListener('mousemove', (e) => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 2; // Cenizas más pequeñas, sutiles y elegantes
+                this.speedX = Math.random() * 0.6 - 0.3;
+                this.speedY = -(Math.random() * 0.8 + 0.4); // Suben flotando imitando calor/ceniza
+                this.angle = Math.random() * 360;
+                this.spin = Math.random() * 1 - 0.5;
+                this.opacity = Math.random() * 0.4 + 0.15;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.y / 50) * 0.3;
+                this.angle += this.spin;
+
+                if (mouse.x && mouse.y) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        if (mouse.x > this.x && this.x > 10) this.x -= 1.5;
+                        if (mouse.x < this.x && this.x < canvas.width - 10) this.x += 1.5;
+                    }
+                }
+                if (this.y < -20) {
+                    this.y = canvas.height + 20;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle * Math.PI / 180);
+                // Tono ceniza oscura purpúrea deslavada
+                ctx.fillStyle = `rgba(139, 117, 165, ${this.opacity})`;
+                
+                // Dibujo de un polígono irregular de ceniza
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(this.size, -this.size/2);
+                ctx.lineTo(this.size*1.2, this.size);
+                ctx.lineTo(-this.size/2, this.size*1.4);
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
         }
 
-        // --- SCROLL REVEAL ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < 50; i++) { particlesArray.push(new Particle()); }
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        initParticles();
+        animateParticles();
+
+        // 3. SISTEMA DE GALERÍA LIGHTBOX INTERACTIVO
+        const galleryImgs = document.querySelectorAll('.gallery-img');
+        const lightbox = document.getElementById('lightbox-modal');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentImgIndex = 0;
+
+        const openLightbox = (index) => {
+            currentImgIndex = parseInt(index);
+            const src = galleryImgs[currentImgIndex].getAttribute('src');
+            const alt = galleryImgs[currentImgIndex].getAttribute('alt');
+            
+            lightboxImg.setAttribute('src', src);
+            lightboxCaption.textContent = alt;
+            lightbox.classList.add('visible');
+        };
+
+        galleryImgs.forEach(img => {
+            img.addEventListener('click', (e) => {
+                openLightbox(e.target.getAttribute('data-index'));
             });
-        }, { threshold: 0.1 });
+        });
+
+        const closeLightbox = () => { lightbox.classList.remove('visible'); };
+        closeBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+
+        const showNextImg = () => {
+            currentImgIndex = (currentImgIndex + 1) % galleryImgs.length;
+            openLightbox(currentImgIndex);
+        };
+        const showPrevImg = () => {
+            currentImgIndex = (currentImgIndex - 1 + galleryImgs.length) % galleryImgs.length;
+            openLightbox(currentImgIndex);
+        };
+
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextImg(); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevImg(); });
+
+        // Soporte para flechas del teclado
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('visible')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') showNextImg();
+            if (e.key === 'ArrowLeft') showPrevImg();
+        });
+
+        // 4. Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.05 });
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
 </body>
